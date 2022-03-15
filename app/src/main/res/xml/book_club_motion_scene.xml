@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/collapsed">
+        <Constraint
+            android:id="@+id/book_club_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="134dp" />
+
+        <Constraint
+            android:id="@+id/book_club_club_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="11dp"
+            android:text="Ourpage CLUB"
+            android:textAppearance="@style/ta_eb_26_kr"
+            motion:layout_constraintBottom_toTopOf="@+id/book_club_club_desc_tv"
+            motion:layout_constraintStart_toStartOf="parent">
+
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/white10" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_club_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:text="독서의 순간을 함께 나누고 기록해요"
+            android:textAppearance="@style/ta_r_14_kr"
+            motion:layout_constraintBottom_toTopOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintStart_toStartOf="@+id/book_club_club_title_tv">
+
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/white10" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_total_member_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="3dp"
+            android:text="total 10 members"
+            android:textAppearance="@style/ta_sb_10_en"
+            motion:layout_constraintBottom_toBottomOf="@+id/book_club_top_view"
+            motion:layout_constraintStart_toStartOf="@+id/book_club_club_desc_tv">
+
+            <CustomAttribute
+                motion:attributeName="backgroundResource"
+                motion:customReference="@drawable/bg_white10_10_null_null" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_club_level_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="3dp"
+            android:text="Lv.3\t|\t396 pages"
+            android:textAppearance="@style/ta_sb_10_en"
+            motion:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintStart_toEndOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintTop_toTopOf="@+id/book_club_total_member_tv">
+
+            <CustomAttribute
+                motion:attributeName="backgroundResource"
+                motion:customReference="@drawable/ic_speech_bubble_white10" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_character_iv"
+            android:layout_width="28dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="2dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintStart_toEndOf="@+id/book_club_club_level_tv">
+
+            <CustomAttribute
+                motion:attributeName="imageResource"
+                motion:customReference="@drawable/ic_u_character_white10" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_next_iv"
+            android:layout_width="18dp"
+            android:layout_height="22dp"
+            android:padding="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_next_white"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/book_club_character_iv"
+            motion:layout_constraintTop_toTopOf="@+id/book_club_club_title_tv">
+
+        </Constraint>
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/expanded">
+        <Constraint
+            android:id="@+id/book_club_top_view"
+            android:layout_width="match_parent"
+            android:layout_height="206dp" />
+
+        <Constraint
+            android:id="@+id/book_club_club_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="11dp"
+            android:text="Ourpage CLUB"
+            android:textAppearance="@style/ta_eb_26_kr"
+            motion:layout_constraintBottom_toTopOf="@+id/book_club_club_desc_tv"
+            motion:layout_constraintStart_toStartOf="parent">
+
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/white" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_club_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
+            android:text="독서의 순간을 함께 나누고 기록해요"
+            android:textAppearance="@style/ta_r_14_kr"
+            motion:layout_constraintBottom_toTopOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintStart_toStartOf="@+id/book_club_club_title_tv">
+
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/white" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_total_member_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="3dp"
+            android:text="total 10 members"
+            android:textAppearance="@style/ta_sb_10_en"
+            motion:layout_constraintBottom_toBottomOf="@+id/book_club_top_view"
+            motion:layout_constraintStart_toStartOf="@+id/book_club_club_desc_tv">
+
+            <CustomAttribute
+                motion:attributeName="backgroundResource"
+                motion:customReference="@drawable/bg_white_10_null_null" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_club_level_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="3dp"
+            android:text="Lv.3\t|\t396 pages"
+            android:textAppearance="@style/ta_sb_10_en"
+            motion:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintStart_toEndOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintTop_toTopOf="@+id/book_club_total_member_tv">
+
+            <CustomAttribute
+                motion:attributeName="backgroundResource"
+                motion:customReference="@drawable/ic_speech_bubble" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_character_iv"
+            android:layout_width="28dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="2dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintStart_toEndOf="@+id/book_club_club_level_tv">
+
+            <CustomAttribute
+                motion:attributeName="imageResource"
+                motion:customReference="@drawable/ic_u_character" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/book_club_next_iv"
+            android:layout_width="18dp"
+            android:layout_height="22dp"
+            android:padding="6dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_next_white"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/book_club_character_iv"
+            motion:layout_constraintTop_toTopOf="@+id/book_club_club_title_tv">
+
+        </Constraint>
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetEnd="@+id/collapsed"
+        motion:constraintSetStart="@+id/expanded">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/book_club_sv"
+            motion:touchAnchorSide="top" />
+    </Transition>
+</MotionScene>

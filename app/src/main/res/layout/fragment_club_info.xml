@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_layout_gradation"
+    tools:context=".view.main.bookclub.ClubInfoFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/club_info_tb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="Ourpage Club"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ta_eb_18_kr"
+        app:titleTextColor="@color/primary" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="true"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/club_info_tb">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/club_info_view"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/bg_grey_10_null_null"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/club_info_character_iv"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="27dp"
+                android:src="@drawable/ic_u_character"
+                app:layout_constraintBottom_toTopOf="@+id/club_info_member_cnt_tv"
+                app:layout_constraintStart_toStartOf="@+id/club_info_view"
+                app:layout_constraintTop_toTopOf="@+id/club_info_view"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/club_info_level_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lv.3"
+                android:textAppearance="@style/ta_b_30_kr"
+                app:layout_constraintBottom_toTopOf="@+id/club_info_member_cnt_tv"
+                app:layout_constraintEnd_toEndOf="@+id/club_info_character_iv"
+                app:layout_constraintStart_toStartOf="@+id/club_info_character_iv" />
+
+            <TextView
+                android:id="@+id/club_info_member_cnt_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_black_light_75_null_null"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="2dp"
+                android:text="멤버 : 7 / 10"
+                android:textAppearance="@style/ta_r_8_kr"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/club_info_view"
+                app:layout_constraintEnd_toEndOf="@+id/club_info_character_iv"
+                app:layout_constraintStart_toStartOf="@+id/club_info_character_iv"
+                app:layout_constraintTop_toBottomOf="@+id/club_info_character_iv" />
+
+            <View
+                android:id="@+id/club_info_dotted_line_view"
+                android:layout_width="88dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="12dp"
+                android:layout_marginStart="38dp"
+                android:background="@drawable/bg_dotted_vertical_line_grey_dark_1"
+                android:layerType="software"
+                app:layout_constraintBottom_toBottomOf="@+id/club_info_view"
+                app:layout_constraintStart_toStartOf="@+id/club_info_character_iv"
+                app:layout_constraintTop_toTopOf="@+id/club_info_view" />
+
+            <ImageView
+                android:id="@+id/club_info_record_iv"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="106dp"
+                android:src="@drawable/ic_write_black_light"
+                app:layout_constraintBottom_toTopOf="@+id/club_info_book_iv"
+                app:layout_constraintStart_toStartOf="@+id/club_info_character_iv"
+                app:layout_constraintTop_toTopOf="@+id/club_info_dotted_line_view" />
+
+            <TextView
+                android:id="@+id/club_info_record_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="작성 기록 수\t\t\t28 pages"
+                android:textAppearance="@style/ta_r_12_kr"
+                android:textColor="@color/black_light"
+                app:layout_constraintBottom_toBottomOf="@+id/club_info_record_iv"
+                app:layout_constraintStart_toEndOf="@+id/club_info_record_iv"
+                app:layout_constraintTop_toTopOf="@+id/club_info_record_iv" />
+
+            <ImageView
+                android:id="@+id/club_info_book_iv"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@drawable/ic_books_black_light"
+                app:layout_constraintBottom_toTopOf="@+id/club_info_comment_iv"
+                app:layout_constraintStart_toStartOf="@+id/club_info_record_iv"
+                app:layout_constraintTop_toBottomOf="@+id/club_info_record_iv" />
+
+            <TextView
+                android:id="@+id/club_info_book_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="추가한 책 수\t\t\t23 books"
+                android:textAppearance="@style/ta_r_12_kr"
+                android:textColor="@color/black_light"
+                app:layout_constraintBottom_toBottomOf="@+id/club_info_book_iv"
+                app:layout_constraintStart_toEndOf="@+id/club_info_book_iv"
+                app:layout_constraintTop_toTopOf="@+id/club_info_book_iv" />
+
+            <ImageView
+                android:id="@+id/club_info_comment_iv"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@drawable/ic_comment_black_light"
+                app:layout_constraintBottom_toTopOf="@+id/club_info_heart_iv"
+                app:layout_constraintStart_toStartOf="@+id/club_info_record_iv"
+                app:layout_constraintTop_toBottomOf="@+id/club_info_book_iv" />
+
+            <TextView
+                android:id="@+id/club_info_comment_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="남긴 댓글 수\t\t\t43 replies"
+                android:textAppearance="@style/ta_r_12_kr"
+                android:textColor="@color/black_light"
+                app:layout_constraintBottom_toBottomOf="@+id/club_info_comment_iv"
+                app:layout_constraintStart_toEndOf="@+id/club_info_comment_iv"
+                app:layout_constraintTop_toTopOf="@+id/club_info_comment_iv" />
+
+            <ImageView
+                android:id="@+id/club_info_heart_iv"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@drawable/ic_heart_black_light"
+                app:layout_constraintBottom_toBottomOf="@+id/club_info_dotted_line_view"
+                app:layout_constraintStart_toStartOf="@+id/club_info_record_iv"
+                app:layout_constraintTop_toBottomOf="@+id/club_info_comment_iv" />
+
+            <TextView
+                android:id="@+id/club_info_like_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="총 좋아요 수\t\t\t43 likes"
+                android:textAppearance="@style/ta_r_12_kr"
+                android:textColor="@color/black_light"
+                app:layout_constraintBottom_toBottomOf="@+id/club_info_heart_iv"
+                app:layout_constraintStart_toEndOf="@+id/club_info_heart_iv"
+                app:layout_constraintTop_toTopOf="@+id/club_info_heart_iv" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/club_info_add_club_btn"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_secondary_10_null_null"
+                android:stateListAnimator="@null"
+                android:text="@string/action_add_club"
+                android:textAppearance="@style/ta_b_14_kr"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/club_info_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/club_info_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                android:clipToPadding="true"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/club_info_add_club_btn"
+                app:layout_constraintVertical_bias="0.0"
+                tools:listitem="@layout/item_member" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

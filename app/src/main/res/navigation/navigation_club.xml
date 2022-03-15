@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_club"
+    app:startDestination="@id/initFragment">
+
+    <activity
+        android:id="@+id/settingActivity"
+        android:name="com.mangpo.bookclub.view.setting.SettingActivity"
+        android:label="activity_setting"
+        tools:layout="@layout/activity_setting" />
+    <fragment
+        android:id="@+id/bookClubFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.BookClubFragment"
+        android:label="fragment_book_club"
+        tools:layout="@layout/fragment_book_club" >
+        <action
+            android:id="@+id/action_bookClubFragment_to_settingActivity"
+            app:destination="@id/settingActivity" />
+        <action
+            android:id="@+id/action_bookClubFragment_to_clubInfoFragment"
+            app:destination="@id/clubInfoFragment" />
+        <action
+            android:id="@+id/action_bookClubFragment_to_bookClubLibraryFragment"
+            app:destination="@id/bookClubLibraryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clubInfoFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.ClubInfoFragment"
+        android:label="fragment_club_info"
+        tools:layout="@layout/fragment_club_info" >
+        <argument
+            android:name="role"
+            app:argType="string" />
+        <argument
+            android:name="isFirst"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_clubInfoFragment_to_inviteMemDialogFragment"
+            app:destination="@id/inviteMemDialogFragment" />
+        <action
+            android:id="@+id/action_clubInfoFragment_to_memberInfoFragment"
+            app:destination="@id/memberInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/initFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.BookClubMainFragment"
+        android:label="fragment_init"
+        tools:layout="@layout/fragment_book_club_main" >
+        <action
+            android:id="@+id/action_initFragment_to_settingActivity"
+            app:destination="@id/settingActivity" />
+        <action
+            android:id="@+id/action_initFragment_to_bookClubSettingFragment"
+            app:destination="@id/bookClubSettingFragment" />
+        <action
+            android:id="@+id/action_initFragment_to_msgDialogFragment"
+            app:destination="@id/msgDialogFragment" />
+        <action
+            android:id="@+id/action_initFragment_to_createBookClubFragment"
+            app:destination="@id/createBookClubFragment" />
+        <action
+            android:id="@+id/action_initFragment_to_bookClubFragment"
+            app:destination="@id/bookClubFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookClubSettingFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.BookClubSettingFragment"
+        android:label="fragment_book_club_setting"
+        tools:layout="@layout/fragment_book_club_setting" />
+    <dialog
+        android:id="@+id/msgDialogFragment"
+        android:name="com.mangpo.bookclub.view.dialog.MsgDialogFragment"
+        android:label="fragment_msg_dialog"
+        tools:layout="@layout/fragment_msg_dialog" >
+        <argument
+            android:name="msg"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/createBookClubFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.CreateBookClubFragment"
+        android:label="fragment_create_book_club"
+        tools:layout="@layout/fragment_create_book_club" >
+        <action
+            android:id="@+id/action_createBookClubFragment_to_bookClubFragment"
+            app:destination="@id/bookClubFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/inviteMemDialogFragment"
+        android:name="com.mangpo.bookclub.view.dialog.InviteMemDialogFragment"
+        android:label="fragment_invite_mem_dialog"
+        tools:layout="@layout/fragment_invite_mem_dialog" >
+        <action
+            android:id="@+id/action_inviteMemDialogFragment_to_inviteCompleteDialogFragment"
+            app:destination="@id/inviteCompleteDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/inviteCompleteDialogFragment"
+        android:name="com.mangpo.bookclub.view.dialog.InviteCompleteDialogFragment"
+        android:label="fragment_invite_complete_dialog"
+        tools:layout="@layout/fragment_invite_complete_dialog" />
+    <fragment
+        android:id="@+id/memberInfoFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.MemberInfoFragment"
+        android:label="fragment_member_info"
+        tools:layout="@layout/fragment_member_info" />
+    <fragment
+        android:id="@+id/bookClubLibraryFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.BookClubLibraryFragment"
+        android:label="fragment_book_club_library"
+        tools:layout="@layout/fragment_book_club_library" />
+</navigation>

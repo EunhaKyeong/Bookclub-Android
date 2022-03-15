@@ -92,7 +92,7 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
                 clickedLinkPosition = position
                 val bundle: Bundle = Bundle()
                 bundle.putString("title", getString(R.string.msg_delete_link))
-                bundle.putString("desc", getString(R.string.msg_delete_link_desc))
+                bundle.putString("desc", getString(R.string.msg_no_restore_after_delete))
 
                 actionDialog.arguments = bundle
                 actionDialog.show(requireActivity().supportFragmentManager, null)

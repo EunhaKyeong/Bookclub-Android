@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="220dp"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="10dp"
+    android:background="@drawable/bg_primary_20_null_null">
+
+    <TextView
+        android:id="@+id/club_name_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="22dp"
+        android:text="북클럽 A"
+        android:textAppearance="@style/ta_b_16_kr"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/club_new_iv"
+        android:layout_width="9dp"
+        android:layout_height="9dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_new"
+        app:layout_constraintBottom_toBottomOf="@+id/club_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/club_name_tv" />
+
+    <TextView
+        android:id="@+id/club_desc_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="일단 이곳은 20자가 들어갑니다."
+        android:textAppearance="@style/ta_r_12_kr"
+        android:textColor="@color/grey_dark"
+        app:layout_constraintEnd_toEndOf="@+id/club_name_tv"
+        app:layout_constraintStart_toStartOf="@+id/club_name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/club_name_tv" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bg_banner_opacity"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/club_profile_image1_iv"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/bg_default_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/club_profile_image2_iv"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/bg_default_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/club_profile_image1_iv" />
+
+    <ImageView
+        android:id="@+id/club_profile_image3_iv"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/bg_default_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/club_profile_image2_iv" />
+
+    <TextView
+        android:id="@+id/club_more_user_cnt_tv"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_white_circle"
+        android:gravity="center"
+        android:text="+2"
+        android:textAppearance="@style/ta_r_8_kr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/club_profile_image3_iv" />
+
+    <View
+        android:id="@+id/club_speech_bubble_view"
+        android:layout_width="57dp"
+        android:layout_height="16dp"
+        android:background="@drawable/ic_speech_bubble"
+        app:layout_constraintBottom_toBottomOf="@+id/club_character_iv"
+        app:layout_constraintEnd_toStartOf="@+id/club_character_iv" />
+
+    <TextView
+        android:id="@+id/club_page_cnt_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:text="100"
+        android:textAppearance="@style/ta_r_10_kr"
+        app:layout_constraintBottom_toBottomOf="@+id/club_speech_bubble_view"
+        app:layout_constraintEnd_toStartOf="@+id/club_page_tv"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/club_speech_bubble_view"
+        app:layout_constraintTop_toTopOf="@+id/club_speech_bubble_view" />
+
+    <TextView
+        android:id="@+id/club_page_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="pages"
+        android:textAppearance="@style/ta_r_6_kr"
+        app:layout_constraintBottom_toBottomOf="@+id/club_page_cnt_tv"
+        app:layout_constraintEnd_toEndOf="@+id/club_speech_bubble_view"
+        app:layout_constraintStart_toEndOf="@+id/club_page_cnt_tv"
+        app:layout_constraintTop_toTopOf="@+id/club_page_cnt_tv" />
+
+    <ImageView
+        android:id="@+id/club_character_iv"
+        android:layout_width="24dp"
+        android:layout_height="12dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_u_character"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

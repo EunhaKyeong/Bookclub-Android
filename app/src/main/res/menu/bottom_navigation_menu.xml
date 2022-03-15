@@ -10,4 +10,9 @@
         android:icon="@drawable/ic_books_off"
         android:contentDescription="@string/title_library"
         android:title="@string/title_library" />
+    <item
+        android:id="@+id/navigation_club"
+        android:icon="@drawable/ic_bookshelf_off"
+        android:contentDescription="@string/title_book_club"
+        android:title="@string/title_book_club" />
 </menu>

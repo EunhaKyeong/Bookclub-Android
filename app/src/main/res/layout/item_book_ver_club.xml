@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="7.5dp">
+
+    <ImageView
+        android:id="@+id/book_iv"
+        android:layout_width="67dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_null_10_null_null"
+        android:scaleType="fitXY"
+        android:src="@drawable/default_book"
+        app:layout_constraintBottom_toTopOf="@+id/book_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/book_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="지구 끝의 온실"
+        android:textAppearance="@style/ta_r_8_kr"
+        app:layout_constraintBottom_toTopOf="@+id/nickname_tv"
+        app:layout_constraintEnd_toEndOf="@+id/book_iv"
+        app:layout_constraintStart_toStartOf="@+id/book_iv"
+        app:layout_constraintTop_toBottomOf="@+id/book_iv" />
+
+    <TextView
+        android:id="@+id/nickname_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="남아트"
+        android:textAppearance="@style/ta_r_6_kr"
+        android:textColor="@color/primary50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/book_iv"
+        app:layout_constraintStart_toStartOf="@+id/book_iv"
+        app:layout_constraintTop_toBottomOf="@+id/book_name_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

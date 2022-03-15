@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_layout_gradation"
+    tools:context=".view.main.bookclub.BookClubLibraryFragment">
+
+    <View
+        android:id="@+id/book_club_library_view"
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:background="@color/primary"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/book_club_library_back_iv"
+        android:layout_width="27dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="7dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_back_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/book_club_library_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/bg_white_8_null_null"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
+        android:text="북클럽 A의 서재"
+        android:textAppearance="@style/ta_b_14_kr"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/book_club_library_icon_iv"
+        android:layout_width="13dp"
+        android:layout_height="11dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/ic_two_rows_asymmetry"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_library_title_tv"
+        app:layout_constraintEnd_toEndOf="@+id/book_club_library_title_tv"
+        app:layout_constraintTop_toTopOf="@+id/book_club_library_title_tv" />
+
+    <CheckBox
+        android:id="@+id/book_club_library_search_cb"
+        android:layout_width="61dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/selector_book_club_library_filter_btn"
+        android:button="@null"
+        android:paddingStart="15dp"
+        android:text="@string/title_search"
+        android:textAppearance="@style/ta_r_10_kr"
+        android:textColor="@drawable/selector_book_club_library_filter_btn_text"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_library_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_club_library_title_tv" />
+
+    <ImageView
+        android:id="@+id/book_club_library_search_iv"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_marginEnd="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_reading_glasses_white"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_library_search_cb"
+        app:layout_constraintEnd_toEndOf="@+id/book_club_library_search_cb"
+        app:layout_constraintTop_toTopOf="@+id/book_club_library_search_cb" />
+
+    <CheckBox
+        android:id="@+id/book_club_library_member_cb"
+        android:layout_width="51dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/selector_book_club_library_filter_btn"
+        android:button="@null"
+        android:gravity="center"
+        android:text="@string/title_club_mem"
+        android:textAppearance="@style/ta_r_10_kr"
+        android:textColor="@drawable/selector_book_club_library_filter_btn_text"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_library_search_cb"
+        app:layout_constraintStart_toEndOf="@+id/book_club_library_search_cb"
+        app:layout_constraintTop_toTopOf="@+id/book_club_library_search_cb" />
+
+    <CheckBox
+        android:id="@+id/book_club_library_sort_cb"
+        android:layout_width="51dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/selector_book_club_library_filter_btn"
+        android:button="@null"
+        android:gravity="center"
+        android:text="@string/title_sort"
+        android:textAppearance="@style/ta_r_10_kr"
+        android:textColor="@drawable/selector_book_club_library_filter_btn_text"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_library_search_cb"
+        app:layout_constraintStart_toEndOf="@+id/book_club_library_member_cb"
+        app:layout_constraintTop_toTopOf="@+id/book_club_library_search_cb" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_club_library_view"
+        app:spanCount="3"
+        tools:listitem="@layout/item_book" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

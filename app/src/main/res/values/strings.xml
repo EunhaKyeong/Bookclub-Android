@@ -20,7 +20,9 @@
     <string name="error_different_new_pw">새로운 비밀번호가 서로 다릅니다.</string>
     <string name="error_exceed_img">이미지는 최대 4장까지 첨부할 수 있습니다.</string>
     <string name="error_select_book">책을 선택해 주세요.</string>
-    <string name="err_input_title_content">제목과 내용을 입력해주세요.</string>
+    <string name="error_input_title_content">제목과 내용을 입력해주세요.</string>
+    <string name="error_exceed_book_club_cnt">북클럽은 3개까지\n개설 / 가입 가능합니다.</string>
+    <string name="error_not_sign_member">가입되지 않은 클럽원 입니다.</string>
 
     <string name="title_email">이메일</string>
     <string name="title_password">비밀번호</string>
@@ -80,7 +82,23 @@
     <string name="title_oldest">오래된순</string>
     <string name="title_by_name">이름순</string>
     <string name="title_memo_list">MEMO LIST</string>
+    <string name="title_club_memo">Club Memo</string>
+    <string name="title_trending_memo">Trending Memo</string>
+    <string name="title_club_pres">클럽장</string>
+    <string name="title_club_mem">클럽원</string>
+    <string name="title_book_club_en">BOOK CLUB</string>
+    <string name="title_my_book_club">나의 북클럽</string>
+    <string name="title_book_club_management">북클럽 관리</string>
+    <string name="title_book_club_setting">북클럽 설정</string>
+    <string name="title_book_club_help">북클럽 도움말</string>
+    <string name="title_book_club_add">북클럽 추가</string>
     <string name="title_help">Our page 도움말</string>
+    <string name="title_made_book_club">내가 만든 북클럽</string>
+    <string name="title_sign_in_book_club">가입한 북클럽</string>
+    <string name="title_create_book_club">북클럽 생성</string>
+    <string name="title_club_name">클럽명</string>
+    <string name="title_club_introduce">클럽 한줄 소개 및 다짐</string>
+    <string name="title_member_info">클럽원 활동 정보</string>
 
     <string name="action_login_en">LOG IN</string>
     <string name="action_signin">회원가입</string>
@@ -103,9 +121,13 @@
     <string name="action_update">수정하기</string>
     <string name="action_cancel">취소</string>
     <string name="action_delete_book">책 삭제</string>
+    <string name="action_more">더보기 ></string>
+    <string name="action_add_club">클럽원 추가하기</string>
     <string name="action_undo">되돌리기</string>
+    <string name="action_invite_member">클럽원 초대하기</string>
+    <string name="action_invite">초대하기</string>
 
-    <string name="msg_input_email">이메일 주소를 입력해 주세요.</string>
+    <string name="msg_input_email1">이메일 주소를 입력해 주세요.</string>
     <string name="msg_agree_privacy">이용약관 및 개인정보처리방침에 동의합니다.</string>
     <string name="msg_input_code">인증코드를 입력해주세요.</string>
     <string name="msg_password_reissue_desc">회원가입 시 사용한 이메일로\n임시 비밀번호를 발급해 드릴게요!</string>
@@ -166,7 +188,22 @@
     <string name="msg_delete_book_desc">전체 메모 리스트도 함께 삭제됩니다.</string>
     <string name="msg_delete_record">기록이 삭제되었습니다.</string>
     <string name="msg_delete_link">링크를 삭제하시겠습니까?</string>
-    <string name="msg_delete_link_desc">삭제 후 복구할 수 없습니다.</string>
+    <string name="msg_no_restore_after_delete">삭제 후 복구할 수 없습니다.</string>
+    <string name="msg_no_restore_after_resign">탈퇴 후 복구할 수 없습니다.</string>
     <string name="msg_null_link">링크 제목과 링크를 모두 입력해 주세요.</string>
+    <string name="msg_no_book_club">가입된 북클럽이 없습니다.\n친구와 함께 시작해보세요!</string>
     <string name="msg_checklist_move_store">완료된 체크리스트는 보관함으로 이동합니다</string>
+    <string name="msg_no_create_book_club">내가 만든 북클럽이 없습니다.</string>
+    <string name="msg_no_sign_in_book_club">가입되어있는 클럽이 없습니다.</string>
+    <string name="msg_delete_book_club">북클럽을 삭제하시겠습니까?</string>
+    <string name="msg_resign_book_club">북클럽을 탈퇴하시겠습니까?</string>
+    <string name="msg_input_club_name">클럽명을 입력해주세요. (10자 제한)</string>
+    <string name="msg_input_club_introduce">목표 등 클럽 소개글을 입력해 주세요.(20자 제한)</string>
+    <string name="msg_congratulation">CONGRATULATION</string>
+    <string name="msg_invite_new_member">새로운 클럽원을 지금 바로 초대해 보세요.</string>
+    <string name="msg_no_memo_in_club">클럽원들의 메모가 없습니다</string>
+    <string name="msg_no_trending_memo">트렌딩 메모가 없습니다.</string>
+    <string name="msg_input_member_email">초대할 클럽원 이메일을 입력해주세요.</string>
+    <string name="msg_input_email2">이메일을 입력해주세요.</string>
+    <string name="msg_invite_mem_desc">상대방이 수락하면 클럽원이 추가됩니다!</string>
 </resources>

@@ -218,7 +218,7 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(FragmentRecordBinding
         if (binding.recordSelectBookBtn.text==getString(R.string.msg_select_book))
             showToast(getString(R.string.error_select_book))
         else if (binding.recordTitleEt.text.isBlank() || binding.recordContentEt.text.isBlank())
-            showToast(getString(R.string.err_input_title_content))
+            showToast(getString(R.string.error_input_title_content))
         else if (args.mode=="CREATE") {
             PrefsUtils.setTempRecord("")
             val action = RecordFragmentDirections.actionRecordFragmentToRecordSettingFragment("CREATE", Gson().toJson(setRecordVerCreate()), Gson().toJson(book), null)

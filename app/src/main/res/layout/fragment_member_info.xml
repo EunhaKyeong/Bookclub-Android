@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_layout_gradation"
+    tools:context=".view.main.bookclub.MemberInfoFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/member_info_tb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="@string/title_member_info"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ta_eb_18_kr"
+        app:titleTextColor="@color/primary" />
+
+    <ImageView
+        android:id="@+id/member_info_member_iv"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/bg_default_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_tb" />
+
+    <TextView
+        android:id="@+id/member_info_pres_tv"
+        android:layout_width="38dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_secondary_75_null_null"
+        android:gravity="center"
+        android:text="@string/title_club_pres"
+        android:textAppearance="@style/ta_b_8_kr"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/member_info_member_iv"
+        app:layout_constraintStart_toStartOf="@+id/member_info_member_iv"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_member_iv" />
+
+    <TextView
+        android:id="@+id/member_info_mem_tv"
+        android:layout_width="38dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_black_light_75_null_null"
+        android:gravity="center"
+        android:text="@string/title_club_mem"
+        android:textAppearance="@style/ta_b_8_kr"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/member_info_member_iv"
+        app:layout_constraintStart_toStartOf="@+id/member_info_member_iv"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_member_iv" />
+
+    <TextView
+        android:id="@+id/member_info_sign_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="22.02.20 가입"
+        android:textAppearance="@style/ta_r_10_kr"
+        app:layout_constraintEnd_toEndOf="@+id/member_info_member_iv"
+        app:layout_constraintStart_toStartOf="@+id/member_info_member_iv"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_pres_tv" />
+
+    <View
+        android:id="@+id/member_info_vertical_dotted_line_view"
+        android:layout_width="112dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="78dp"
+        android:background="@drawable/bg_dotted_vertical_line_grey_dark_1"
+        android:layerType="software"
+        app:layout_constraintBottom_toBottomOf="@+id/member_info_sign_date_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/member_info_member_iv" />
+
+    <TextView
+        android:id="@+id/member_info_nickname_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:text="일이삼사오육칠팔구십"
+        android:textAppearance="@style/ta_b_20_kr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/member_info_member_iv" />
+
+    <TextView
+        android:id="@+id/member_info_email_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="namart@naver.com"
+        android:textAppearance="@style/ta_r_13_kr"
+        app:layout_constraintStart_toStartOf="@+id/member_info_nickname_tv"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_nickname_tv" />
+
+    <ImageView
+        android:id="@+id/member_info_record_iv"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="7dp"
+        android:src="@drawable/ic_write_black_light"
+        app:layout_constraintBottom_toTopOf="@+id/member_info_book_iv"
+        app:layout_constraintStart_toStartOf="@+id/member_info_email_tv" />
+
+    <TextView
+        android:id="@+id/member_info_record_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:text="작성 기록 수    28 pages"
+        android:textAppearance="@style/ta_r_12_kr"
+        android:textColor="@color/black_light"
+        app:layout_constraintBottom_toBottomOf="@+id/member_info_record_iv"
+        app:layout_constraintStart_toEndOf="@+id/member_info_record_iv"
+        app:layout_constraintTop_toTopOf="@+id/member_info_record_iv" />
+
+    <ImageView
+        android:id="@+id/member_info_book_iv"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="7dp"
+        android:src="@drawable/ic_books_black_light"
+        app:layout_constraintBottom_toTopOf="@+id/member_info_comment_iv"
+        app:layout_constraintStart_toStartOf="@+id/member_info_email_tv" />
+
+    <TextView
+        android:id="@+id/member_info_book_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:text="추가한 책 수    13 books"
+        android:textAppearance="@style/ta_r_12_kr"
+        android:textColor="@color/black_light"
+        app:layout_constraintBottom_toBottomOf="@+id/member_info_book_iv"
+        app:layout_constraintStart_toEndOf="@+id/member_info_book_iv"
+        app:layout_constraintTop_toTopOf="@+id/member_info_book_iv" />
+
+    <ImageView
+        android:id="@+id/member_info_comment_iv"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:src="@drawable/ic_comment_black_light"
+        app:layout_constraintBottom_toBottomOf="@+id/member_info_sign_date_tv"
+        app:layout_constraintStart_toStartOf="@+id/member_info_email_tv" />
+
+    <TextView
+        android:id="@+id/member_info_comment_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:text="남긴 댓글 수    43 replies"
+        android:textAppearance="@style/ta_r_12_kr"
+        android:textColor="@color/black_light"
+        app:layout_constraintBottom_toBottomOf="@+id/member_info_comment_iv"
+        app:layout_constraintStart_toEndOf="@+id/member_info_comment_iv"
+        app:layout_constraintTop_toTopOf="@+id/member_info_comment_iv" />
+
+    <ImageView
+        android:id="@+id/my_info_speech_bubble_iv"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="205dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/introduce_bg"
+        app:layout_constraintEnd_toStartOf="@+id/member_info_characters_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_tb" />
+
+    <TextView
+        android:id="@+id/member_info_introduce_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="일이삼사오육칠팔구십일이삼사오육칠팔구십"
+        android:textAppearance="@style/ta_b_12_kr"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/my_info_speech_bubble_iv"
+        app:layout_constraintEnd_toEndOf="@+id/my_info_speech_bubble_iv"
+        app:layout_constraintStart_toStartOf="@+id/my_info_speech_bubble_iv"
+        app:layout_constraintTop_toTopOf="@+id/my_info_speech_bubble_iv" />
+
+    <ImageView
+        android:id="@+id/member_info_characters_iv"
+        android:layout_width="60dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="27dp"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/my_info_speech_bubble_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/my_info_speech_bubble_iv"
+        app:layout_constraintTop_toTopOf="@+id/my_info_speech_bubble_iv" />
+
+    <View
+        android:id="@+id/member_info_view"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_grey_10_null_null"
+        app:layout_constraintTop_toBottomOf="@+id/my_info_speech_bubble_iv" />
+
+    <TextView
+        android:id="@+id/member_info_your_taste"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/title_your_taste"
+        android:textAppearance="@style/ta_b_12_kr"
+        app:layout_constraintStart_toStartOf="@+id/member_info_view"
+        app:layout_constraintTop_toTopOf="@+id/member_info_view" />
+
+    <View
+        android:id="@+id/member_info_genre_view"
+        android:layout_width="0dp"
+        android:layout_height="68dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_white_10_null_null"
+        app:layout_constraintEnd_toEndOf="@+id/member_info_view"
+        app:layout_constraintStart_toStartOf="@+id/member_info_view"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_your_taste" />
+
+    <TextView
+        android:id="@+id/member_info_genre_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/title_favorite_genre"
+        android:textAppearance="@style/ta_b_10_kr"
+        app:layout_constraintStart_toStartOf="@+id/member_info_genre_view"
+        app:layout_constraintTop_toTopOf="@+id/member_info_genre_view" />
+
+    <HorizontalScrollView
+        android:id="@+id/member_info_genre_sv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="@+id/member_info_genre_view"
+        app:layout_constraintEnd_toEndOf="@+id/member_info_genre_view"
+        app:layout_constraintStart_toStartOf="@+id/member_info_genre_view"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_genre_tv">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/member_info_genre_cg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|center"
+            android:paddingVertical="10dp"
+            app:chipSpacingVertical="4dp"
+            app:singleLine="true" />
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/member_info_reading_style_tv"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_white_10_null_null"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="15dp"
+        android:text="독서 시간이 정해져 있는 계획파"
+        android:textAppearance="@style/ta_b_10_kr"
+        app:layout_constraintEnd_toEndOf="@+id/member_info_view"
+        app:layout_constraintStart_toStartOf="@+id/member_info_view"
+        app:layout_constraintTop_toBottomOf="@+id/member_info_genre_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

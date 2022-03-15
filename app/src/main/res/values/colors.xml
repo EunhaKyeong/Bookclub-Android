@@ -13,6 +13,7 @@
     <color name="white_dark">#EAEBEE</color>
 
     <color name="primary">#303860</color>
+    <color name="primary50">#80303860</color>
     <color name="primary_light">#646A88</color>
 
     <color name="grey">#EFF0F3</color>

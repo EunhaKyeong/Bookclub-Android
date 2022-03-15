@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="ta_r_6_kr" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/nanum_gothic_regular</item>
+        <item name="android:textSize">6dp</item>
+    </style>
     <style name="ta_r_8_kr" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/nanum_gothic_regular</item>
         <item name="android:textSize">8dp</item>
@@ -16,6 +20,10 @@
         <item name="android:fontFamily">@font/nanum_gothic_regular</item>
         <item name="android:textSize">12dp</item>
     </style>
+    <style name="ta_r_13_kr" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/nanum_gothic_regular</item>
+        <item name="android:textSize">13dp</item>
+    </style>
     <style name="ta_r_14_kr" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/nanum_gothic_regular</item>
         <item name="android:textSize">14dp</item>
@@ -25,6 +33,14 @@
         <item name="android:textSize">15dp</item>
     </style>
 
+    <style name="ta_b_7_kr" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/nanum_gothic_bold</item>
+        <item name="android:textSize">7dp</item>
+    </style>
+    <style name="ta_b_8_kr" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/nanum_gothic_bold</item>
+        <item name="android:textSize">8dp</item>
+    </style>
     <style name="ta_b_10_kr" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/nanum_gothic_bold</item>
         <item name="android:textSize">10dp</item>
@@ -53,10 +69,18 @@
         <item name="android:fontFamily">@font/nanum_gothic_bold</item>
         <item name="android:textSize">24dp</item>
     </style>
+    <style name="ta_b_30_kr" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/nanum_gothic_bold</item>
+        <item name="android:textSize">30dp</item>
+    </style>
 
     <style name="ta_eb_12_kr" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/nanum_gothic_extra_bold</item>
         <item name="android:textSize">12dp</item>
+    </style>
+    <style name="ta_eb_14_kr" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/nanum_gothic_extra_bold</item>
+        <item name="android:textSize">14dp</item>
     </style>
     <style name="ta_eb_18_kr" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/nanum_gothic_extra_bold</item>
@@ -65,6 +89,10 @@
     <style name="ta_eb_24_kr" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/nanum_gothic_extra_bold</item>
         <item name="android:textSize">24dp</item>
+    </style>
+    <style name="ta_eb_26_kr" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/nanum_gothic_extra_bold</item>
+        <item name="android:textSize">26dp</item>
     </style>
 
     <style name="ta_r_10_en" parent="TextAppearance.AppCompat">
@@ -89,9 +117,17 @@
         <item name="android:textSize">10dp</item>
     </style>
 
+    <style name="ta_sb_10_en" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/poppints_semi_bold</item>
+        <item name="android:textSize">10dp</item>
+    </style>
     <style name="ta_sb_14_en" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/poppints_semi_bold</item>
         <item name="android:textSize">14dp</item>
+    </style>
+    <style name="ta_sb_16_en" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/poppints_semi_bold</item>
+        <item name="android:textSize">16dp</item>
     </style>
 
     <style name="ta_b_14_en" parent="TextAppearance.AppCompat">

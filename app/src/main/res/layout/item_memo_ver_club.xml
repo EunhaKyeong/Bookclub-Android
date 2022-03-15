@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="74dp"
+    android:layout_marginBottom="15dp"
+    android:background="@drawable/bg_white_10_null_null">
+
+    <ImageView
+        android:id="@+id/user_iv"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="17dp"
+        android:src="@drawable/bg_default_profile"
+        app:layout_constraintBottom_toTopOf="@+id/nickname_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/nickname_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="남아트"
+        android:textAppearance="@style/ta_r_8_kr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/user_iv"
+        app:layout_constraintStart_toStartOf="@+id/user_iv"
+        app:layout_constraintTop_toBottomOf="@+id/user_iv" />
+
+    <TextView
+        android:id="@+id/memo_title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="18dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="지구 끝의 온실 (김초엽)"
+        android:textAppearance="@style/ta_b_12_kr"
+        app:layout_constraintBottom_toTopOf="@+id/memo_content_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/user_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/memo_content_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="한지가 왜 영주랑 사이가 소원해졌을까? 아마도 한지가 왜 영주랑 사이가 소원해졌을까? 아마도"
+        android:textAppearance="@style/ta_r_10_kr"
+        app:layout_constraintBottom_toTopOf="@+id/line_view"
+        app:layout_constraintEnd_toEndOf="@+id/memo_title_tv"
+        app:layout_constraintStart_toStartOf="@+id/memo_title_tv"
+        app:layout_constraintTop_toBottomOf="@+id/memo_title_tv" />
+
+    <View
+        android:id="@+id/line_view"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/grey_dark"
+        app:layout_constraintBottom_toTopOf="@+id/book_info_tv"
+        app:layout_constraintEnd_toEndOf="@+id/memo_title_tv"
+        app:layout_constraintStart_toStartOf="@+id/memo_title_tv"
+        app:layout_constraintTop_toBottomOf="@+id/memo_content_tv" />
+
+    <TextView
+        android:id="@+id/book_info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4.5dp"
+        android:text="지구 끝의 온실 (김초엽)"
+        android:textAppearance="@style/ta_r_8_kr"
+        android:textColor="@color/grey_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/memo_title_tv"
+        app:layout_constraintTop_toBottomOf="@+id/line_view" />
+
+    <ImageView
+        android:id="@+id/like_iv"
+        android:layout_width="9dp"
+        android:layout_height="9dp"
+        android:layout_marginEnd="2dp"
+        android:src="@drawable/ic_heart_secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/book_info_tv"
+        app:layout_constraintEnd_toStartOf="@+id/like_tv"
+        app:layout_constraintTop_toTopOf="@+id/book_info_tv" />
+
+    <TextView
+        android:id="@+id/like_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="6"
+        android:textAppearance="@style/ta_b_7_kr"
+        android:textColor="@color/secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_iv"
+        app:layout_constraintEnd_toStartOf="@+id/comment_iv"
+        app:layout_constraintTop_toTopOf="@+id/comment_iv" />
+
+    <ImageView
+        android:id="@+id/comment_iv"
+        android:layout_width="9dp"
+        android:layout_height="9dp"
+        android:layout_marginEnd="2dp"
+        android:src="@drawable/ic_comment_secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/book_info_tv"
+        app:layout_constraintEnd_toStartOf="@+id/comment_tv"
+        app:layout_constraintTop_toTopOf="@+id/book_info_tv" />
+
+    <TextView
+        android:id="@+id/comment_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="21"
+        android:textAppearance="@style/ta_b_7_kr"
+        android:textColor="@color/secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/comment_iv"
+        app:layout_constraintEnd_toEndOf="@+id/line_view"
+        app:layout_constraintTop_toTopOf="@+id/comment_iv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

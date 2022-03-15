@@ -1,13 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutDescription="@xml/book_club_motion_scene"
     tools:context=".view.main.bookclub.BookClubFragment">
 
-    <TextView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/book_club_sv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_book_club" />
+        android:layout_height="0dp"
+        android:clipToPadding="true"
+        android:overScrollMode="never"
+        android:paddingBottom="20dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_club_top_view">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/book_club_congratulation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/bg_primary_10_null_null"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/book_club_congratulation_iv"
+                    android:layout_width="191dp"
+                    android:layout_height="91dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_congratulation_character"
+                    app:layout_constraintBottom_toTopOf="@+id/book_club_invite_btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/book_club_congratulation_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/msg_congratulation"
+                    android:textAppearance="@style/ta_sb_16_en"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/book_club_congratulation_iv" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/book_club_invite_btn"
+                    android:layout_width="180dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="11dp"
+                    android:background="@drawable/bg_secondary_8_null_null"
+                    android:gravity="center"
+                    android:text="@string/action_invite_member"
+                    android:textAppearance="@style/ta_b_12_kr"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/book_club_invite_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/book_club_congratulation_iv" />
+
+                <TextView
+                    android:id="@+id/book_club_invite_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/msg_invite_new_member"
+                    android:textAppearance="@style/ta_r_10_kr"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/book_club_invite_btn" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/book_club_club_memo_based_tv"
+                android:layout_width="match_parent"
+                android:layout_height="189dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/bg_grey_10_null_null"
+                android:gravity="center"
+                android:text="@string/msg_no_memo_in_club"
+                android:textAppearance="@style/ta_r_14_kr"
+                android:textColor="@color/grey_dark"
+                app:layout_constraintTop_toBottomOf="@+id/book_club_congratulation_layout" />
+
+            <TextView
+                android:id="@+id/book_club_club_memo_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="14dp"
+                android:text="@string/title_club_memo"
+                android:textAppearance="@style/ta_sb_14_en"
+                app:layout_constraintStart_toStartOf="@+id/book_club_club_memo_based_tv"
+                app:layout_constraintTop_toTopOf="@+id/book_club_club_memo_based_tv" />
+
+            <TextView
+                android:id="@+id/book_club_more_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:paddingHorizontal="5dp"
+                android:text="@string/action_more"
+                android:textAppearance="@style/ta_b_10_kr"
+                android:textColor="@color/primary_light"
+                app:layout_constraintBottom_toBottomOf="@+id/book_club_club_memo_tv"
+                app:layout_constraintEnd_toEndOf="@+id/book_club_club_memo_based_tv"
+                app:layout_constraintTop_toTopOf="@+id/book_club_club_memo_tv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/book_club_book_rv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="17dp"
+                android:clipToPadding="true"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@+id/book_club_club_memo_based_tv"
+                app:layout_constraintEnd_toEndOf="@+id/book_club_club_memo_based_tv"
+                app:layout_constraintStart_toStartOf="@+id/book_club_club_memo_based_tv"
+                app:layout_constraintTop_toBottomOf="@+id/book_club_club_memo_tv"
+                tools:listitem="@layout/item_book_ver_club" />
+
+            <TextView
+                android:id="@+id/book_club_trending_memo_based_tv"
+                android:layout_width="match_parent"
+                android:layout_height="316dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/bg_grey_10_null_null"
+                android:gravity="center"
+                android:text="@string/msg_no_trending_memo"
+                android:textAppearance="@style/ta_r_14_kr"
+                android:textColor="@color/grey_dark"
+                app:layout_constraintTop_toBottomOf="@+id/book_club_club_memo_based_tv" />
+
+            <TextView
+                android:id="@+id/book_club_trending_memo_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="14dp"
+                android:text="@string/title_trending_memo"
+                android:textAppearance="@style/ta_sb_14_en"
+                app:layout_constraintStart_toStartOf="@+id/book_club_trending_memo_based_tv"
+                app:layout_constraintTop_toTopOf="@+id/book_club_trending_memo_based_tv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/book_club_memo_rv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="17dp"
+                android:layout_marginTop="9dp"
+                android:clipToPadding="true"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@+id/book_club_trending_memo_based_tv"
+                app:layout_constraintEnd_toEndOf="@+id/book_club_trending_memo_based_tv"
+                app:layout_constraintStart_toStartOf="@+id/book_club_trending_memo_based_tv"
+                app:layout_constraintTop_toBottomOf="@+id/book_club_trending_memo_tv"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_memo_ver_club" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/book_club_top_view"
+        android:layout_width="match_parent"
+        android:layout_height="206dp"
+        android:background="@color/primary"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/book_club_setting_iv"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:padding="6dp"
+        android:src="@drawable/ic_setting_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/book_club_club_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="11dp"
+        android:text="Ourpage CLUB"
+        android:textAppearance="@style/ta_eb_26_kr"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/book_club_club_desc_tv"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/book_club_club_desc_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:text="독서의 순간을 함께 나누고 기록해요"
+        android:textAppearance="@style/ta_r_14_kr"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/book_club_total_member_tv"
+        app:layout_constraintStart_toStartOf="@+id/book_club_club_title_tv" />
+
+    <TextView
+        android:id="@+id/book_club_total_member_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/bg_white_10_null_null"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="3dp"
+        android:text="total 10 members"
+        android:textAppearance="@style/ta_sb_10_en"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_top_view"
+        app:layout_constraintStart_toStartOf="@+id/book_club_club_desc_tv" />
+
+    <TextView
+        android:id="@+id/book_club_club_level_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/ic_speech_bubble"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="3dp"
+        android:text="Lv.3\t|\t396 pages"
+        android:textAppearance="@style/ta_sb_10_en"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+        app:layout_constraintStart_toEndOf="@+id/book_club_total_member_tv"
+        app:layout_constraintTop_toTopOf="@+id/book_club_total_member_tv" />
+
+    <ImageView
+        android:id="@+id/book_club_character_iv"
+        android:layout_width="28dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="2dp"
+        android:src="@drawable/ic_u_character"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+        app:layout_constraintStart_toEndOf="@+id/book_club_club_level_tv" />
+
+    <ImageView
+        android:id="@+id/book_club_next_iv"
+        android:layout_width="18dp"
+        android:layout_height="22dp"
+        android:padding="6dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_next_white"
+        app:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/book_club_character_iv"
+        app:layout_constraintTop_toTopOf="@+id/book_club_club_title_tv" />
+</androidx.constraintlayout.motion.widget.MotionLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dialog_fragment"
+    tools:context=".view.dialog.InviteMemDialogFragment">
+
+    <TextView
+        android:id="@+id/invite_mem_invite_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_invite_member"
+        android:textAppearance="@style/ta_b_16_kr"
+        app:layout_constraintBottom_toTopOf="@+id/invite_mem_input_email_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/invite_mem_input_email_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/msg_input_member_email"
+        android:textAppearance="@style/ta_r_12_kr"
+        app:layout_constraintBottom_toTopOf="@+id/invite_mem_email_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invite_mem_invite_title_tv" />
+
+    <EditText
+        android:id="@+id/invite_mem_email_et"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_grey_10_null_null"
+        android:hint="@string/msg_input_email2"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="13dp"
+        android:textAppearance="@style/ta_r_12_kr"
+        android:textColor="@color/primary"
+        app:layout_constraintBottom_toTopOf="@+id/invite_mem_line_view"
+        app:layout_constraintTop_toBottomOf="@+id/invite_mem_input_email_tv" />
+
+    <TextView
+        android:id="@+id/invite_mem_not_sign_member_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:visibility="invisible"
+        android:text="@string/error_not_sign_member"
+        android:textAppearance="@style/ta_r_10_kr"
+        android:textColor="@color/secondary"
+        app:layout_constraintBottom_toTopOf="@+id/invite_mem_line_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invite_mem_email_et" />
+
+    <View
+        android:id="@+id/invite_mem_line_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="14dp"
+        android:background="@color/grey_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/invite_mem_cancel_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/action_cancel"
+        android:textAppearance="@style/ta_r_14_kr"
+        android:textColor="@color/grey_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/invite_mem_invite_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invite_mem_line_view" />
+
+    <TextView
+        android:id="@+id/invite_mem_invite_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/action_invite"
+        android:textAppearance="@style/ta_r_14_kr"
+        android:textColor="@color/primary"
+        app:layout_constraintBottom_toBottomOf="@+id/invite_mem_cancel_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/invite_mem_cancel_tv"
+        app:layout_constraintTop_toTopOf="@+id/invite_mem_cancel_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
