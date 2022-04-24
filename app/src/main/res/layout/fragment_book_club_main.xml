@@ -30,61 +30,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/book_club_main_tb" />
 
-    <View
-        android:id="@+id/book_club_main_no_club_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/bg_primary30_20_null_null"
-        app:layout_constraintBottom_toTopOf="@+id/book_club_main_management_view"
-        app:layout_constraintTop_toBottomOf="@+id/book_club_main_my_book_club_tv" />
-
-    <ImageView
-        android:id="@+id/book_club_main_no_club_iv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_bg_banner_opacity"
-        app:layout_constraintBottom_toBottomOf="@+id/book_club_main_no_club_view"
-        app:layout_constraintEnd_toEndOf="@+id/book_club_main_no_club_view"
-        app:layout_constraintStart_toStartOf="@+id/book_club_main_no_club_view" />
-
-    <ImageView
-        android:id="@+id/book_club_main_logo_iv"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_character_white"
-        app:layout_constraintBottom_toTopOf="@+id/book_club_main_no_book_club_tv"
-        app:layout_constraintEnd_toEndOf="@+id/book_club_main_no_club_view"
-        app:layout_constraintStart_toStartOf="@+id/book_club_main_no_club_view"
-        app:layout_constraintTop_toTopOf="@+id/book_club_main_no_club_view"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/book_club_main_no_book_club_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:gravity="center"
-        android:text="@string/msg_no_book_club"
-        android:textAppearance="@style/ta_b_16_kr"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/book_club_main_no_club_view"
-        app:layout_constraintEnd_toEndOf="@+id/book_club_main_no_club_view"
-        app:layout_constraintStart_toStartOf="@+id/book_club_main_no_club_view"
-        app:layout_constraintTop_toBottomOf="@+id/book_club_main_logo_iv" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/book_club_main_club_rv"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="250dp"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="30dp"
         android:clipToPadding="true"
         android:orientation="horizontal"
         android:overScrollMode="never"
+        android:paddingHorizontal="15dp"
         android:scrollbars="none"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/book_club_main_management_view"
@@ -94,9 +49,10 @@
     <View
         android:id="@+id/book_club_main_management_view"
         android:layout_width="match_parent"
-        android:layout_height="294dp"
+        android:layout_height="0dp"
         android:background="@drawable/bg_grey_top_20_null_null"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_club_main_club_rv" />
 
     <TextView
         android:id="@+id/book_club_main_club_management_tv"

@@ -6,6 +6,7 @@ import com.mangpo.bookclub.model.entities.User
 import com.mangpo.bookclub.model.remote.UserResponse
 import com.mangpo.bookclub.repository.UserRepositoryImpl
 import com.mangpo.bookclub.utils.LogUtil
+import com.mangpo.bookclub.utils.PrefsUtils
 
 class UserViewModel: BaseViewModel() {
     private val userRepositoryImpl: UserRepositoryImpl = UserRepositoryImpl()
@@ -32,10 +33,11 @@ class UserViewModel: BaseViewModel() {
             onResponse = {
                 LogUtil.d("UserViewModel", "getUser Success!\ncode: ${it.code()}\nbody: ${it.body()}")
 
-                user = if (it.code()==200)
-                    it.body()!!.data
-                else
-                    null
+                if (it.code()==200) {
+                    user = it.body()!!.data
+                    PrefsUtils.setUserId(user!!.userId)
+                } else
+                    user = null
 
                 _getUserCode.value = Event(it.code())
             },

@@ -8,4 +8,5 @@ object ApiClient {
     val bookService: BookService = ApplicationClass.baseAPI.create(BookService::class.java)
     val kakaoBookService: BookService = ApplicationClass.kakaoAPI.create(BookService::class.java)
     val postService: PostService = ApplicationClass.baseAPI.create(PostService::class.java)
+    val clubService: ClubService = ApplicationClass.baseAPI.create(ClubService::class.java)
 }

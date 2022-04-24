@@ -206,7 +206,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="11dp"
-        android:text="Ourpage CLUB"
         android:textAppearance="@style/ta_eb_26_kr"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/book_club_club_desc_tv"
@@ -217,7 +216,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="13dp"
-        android:text="독서의 순간을 함께 나누고 기록해요"
         android:textAppearance="@style/ta_r_14_kr"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/book_club_total_member_tv"
@@ -233,7 +231,6 @@
         android:paddingHorizontal="20dp"
         android:paddingTop="4dp"
         android:paddingBottom="3dp"
-        android:text="total 10 members"
         android:textAppearance="@style/ta_sb_10_en"
         app:layout_constraintBottom_toBottomOf="@+id/book_club_top_view"
         app:layout_constraintStart_toStartOf="@+id/book_club_club_desc_tv" />
@@ -248,7 +245,6 @@
         android:paddingHorizontal="20dp"
         android:paddingTop="4dp"
         android:paddingBottom="3dp"
-        android:text="Lv.3\t|\t396 pages"
         android:textAppearance="@style/ta_sb_10_en"
         app:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
         app:layout_constraintStart_toEndOf="@+id/book_club_total_member_tv"
@@ -256,10 +252,9 @@
 
     <ImageView
         android:id="@+id/book_club_character_iv"
-        android:layout_width="28dp"
-        android:layout_height="14dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="2dp"
-        android:src="@drawable/ic_u_character"
         app:layout_constraintBottom_toBottomOf="@+id/book_club_total_member_tv"
         app:layout_constraintStart_toEndOf="@+id/book_club_club_level_tv" />
 

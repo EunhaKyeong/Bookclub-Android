@@ -206,4 +206,5 @@
     <string name="msg_input_member_email">초대할 클럽원 이메일을 입력해주세요.</string>
     <string name="msg_input_email2">이메일을 입력해주세요.</string>
     <string name="msg_invite_mem_desc">상대방이 수락하면 클럽원이 추가됩니다!</string>
+    <string name="msg_club_exceed">북클럽은 3개까지\n개설 / 가입 가능합니다.</string>
 </resources>

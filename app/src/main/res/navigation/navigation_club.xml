@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_bookClubFragment_to_bookClubLibraryFragment"
             app:destination="@id/bookClubLibraryFragment" />
+        <argument
+            android:name="clubId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/clubInfoFragment"
@@ -85,7 +88,9 @@
         tools:layout="@layout/fragment_create_book_club" >
         <action
             android:id="@+id/action_createBookClubFragment_to_bookClubFragment"
-            app:destination="@id/bookClubFragment" />
+            app:destination="@id/bookClubFragment"
+            app:popUpTo="@id/initFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <dialog
         android:id="@+id/inviteMemDialogFragment"

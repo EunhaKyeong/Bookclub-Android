@@ -1,6 +1,7 @@
 package com.mangpo.bookclub.utils
 
 import com.mangpo.bookclub.ApplicationClass.Companion.encryptedPrefs
+import com.mangpo.bookclub.ApplicationClass.Companion.prefs
 
 object AuthUtils {
 
@@ -31,8 +32,13 @@ object AuthUtils {
 
     fun getPassword(): String = encryptedPrefs.getString("password", "").toString()  //password 가져오기
 
-    fun clear() {    //JWT, ID, password 초기화
+    fun clear() {    //JWT, ID, password, userId 초기화
         with(encryptedPrefs.edit()) {
+            clear()
+            apply()
+        }
+
+        with(prefs.edit()) {
             clear()
             apply()
         }

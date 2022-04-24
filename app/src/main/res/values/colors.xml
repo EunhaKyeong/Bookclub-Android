@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white10">#1AFFFFFF</color>
     <color name="white50">#80FFFFFF</color>
+    <color name="white_light">#FBFBFD</color>
     <color name="white_dark">#EAEBEE</color>
 
     <color name="primary">#303860</color>

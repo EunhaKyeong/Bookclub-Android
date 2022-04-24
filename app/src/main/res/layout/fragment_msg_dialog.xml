@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:gravity="center"
-        android:textAppearance="@style/ta_b_16_kr"
+        android:textAppearance="@style/ta_r_16_kr"
         app:layout_constraintBottom_toTopOf="@+id/msg_dialog_line_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
