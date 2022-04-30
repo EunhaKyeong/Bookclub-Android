@@ -4,7 +4,6 @@ import com.mangpo.bookclub.ApplicationClass.Companion.encryptedPrefs
 import com.mangpo.bookclub.ApplicationClass.Companion.prefs
 
 object AuthUtils {
-
     fun setJWT(token: String) {   //JWT 저장
         with(encryptedPrefs.edit()) {
             putString("TOKEN", token)
