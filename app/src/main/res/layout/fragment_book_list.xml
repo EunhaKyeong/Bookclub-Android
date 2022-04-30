@@ -34,6 +34,21 @@
         app:layout_constraintTop_toTopOf="@+id/book_list_search_cb" />
 
     <CheckBox
+        android:id="@+id/book_list_club_cb"
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/selector_library_filter_cb"
+        android:button="@null"
+        android:gravity="center"
+        android:text="@string/title_book_club"
+        android:textAppearance="@style/ta_r_10_kr"
+        android:textColor="@drawable/selector_library_cb_text"
+        app:layout_constraintBottom_toBottomOf="@+id/book_list_search_cb"
+        app:layout_constraintStart_toEndOf="@+id/book_list_search_cb"
+        app:layout_constraintTop_toTopOf="@+id/book_list_search_cb" />
+
+    <CheckBox
         android:id="@+id/book_list_sort_cb"
         android:layout_width="60dp"
         android:layout_height="24dp"
@@ -45,7 +60,7 @@
         android:textAppearance="@style/ta_r_10_kr"
         android:textColor="@drawable/selector_library_cb_text"
         app:layout_constraintBottom_toBottomOf="@+id/book_list_search_cb"
-        app:layout_constraintStart_toEndOf="@+id/book_list_search_cb"
+        app:layout_constraintStart_toEndOf="@+id/book_list_club_cb"
         app:layout_constraintTop_toTopOf="@+id/book_list_search_cb" />
 
     <ImageView
@@ -96,6 +111,22 @@
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="@+id/book_list_view" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/book_list_club_filter_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="17dp"
+        android:layout_marginTop="26dp"
+        android:clipToPadding="true"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="@+id/book_list_view"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_club_filter" />
+
     <CheckBox
         android:id="@+id/book_list_newest_cb"
         android:layout_width="45dp"
@@ -144,6 +175,27 @@
         app:layout_constraintStart_toEndOf="@+id/book_list_oldest_cb"
         app:layout_constraintTop_toTopOf="@+id/book_list_oldest_cb" />
 
+    <ImageView
+        android:id="@+id/book_list_empty_iv"
+        android:layout_width="275dp"
+        android:layout_height="157dp"
+        android:layout_marginBottom="95dp"
+        android:src="@drawable/ic_library_empty"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/book_list_sad_character_iv"
+        android:layout_width="259dp"
+        android:layout_height="259dp"
+        android:layout_marginBottom="7dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/book_list_rv"
         android:layout_width="match_parent"
@@ -153,9 +205,13 @@
         android:clipToPadding="true"
         android:overScrollMode="never"
         android:scrollbars="none"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/book_list_view"
+        app:layout_constraintVertical_bias="1.0"
         app:spanCount="3"
         tools:listitem="@layout/item_book" />
 

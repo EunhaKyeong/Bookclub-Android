@@ -4,6 +4,7 @@ import com.mangpo.bookclub.model.entities.CreateClubEntity
 import com.mangpo.bookclub.model.remote.ClubInfoResponse
 import com.mangpo.bookclub.model.remote.ClubListResponse
 import com.mangpo.bookclub.model.remote.CreateClubResponse
+import com.mangpo.bookclub.model.remote.MemberResponse
 import com.mangpo.bookclub.service.ApiClient
 import com.mangpo.bookclub.service.ClubService
 import retrofit2.Call
@@ -46,6 +47,26 @@ class ClubRepositoryImpl: ClubRepository {
             }
 
             override fun onFailure(call: Call<ClubInfoResponse>, t: Throwable) {
+                onFailure(t)
+            }
+        })
+    }
+
+    override fun getClubUserInfo(
+        clubId: Int,
+        userId: Int,
+        onResponse: (Response<MemberResponse>) -> Unit,
+        onFailure: (Throwable) -> Unit
+    ) {
+        clubService.getClubUserInfo(clubId, userId).enqueue(object : Callback<MemberResponse> {
+            override fun onResponse(
+                call: Call<MemberResponse>,
+                response: Response<MemberResponse>
+            ) {
+                onResponse(response)
+            }
+
+            override fun onFailure(call: Call<MemberResponse>, t: Throwable) {
                 onFailure(t)
             }
         })

@@ -28,6 +28,7 @@
                 android:layout_height="190dp"
                 android:layout_margin="20dp"
                 android:background="@drawable/bg_primary_10_null_null"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -84,27 +85,26 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/book_club_club_memo_based_tv"
+                android:id="@+id/book_club_club_books_based_tv"
                 android:layout_width="match_parent"
                 android:layout_height="189dp"
                 android:layout_margin="20dp"
                 android:background="@drawable/bg_grey_10_null_null"
                 android:gravity="center"
-                android:text="@string/msg_no_memo_in_club"
                 android:textAppearance="@style/ta_r_14_kr"
                 android:textColor="@color/grey_dark"
                 app:layout_constraintTop_toBottomOf="@+id/book_club_congratulation_layout" />
 
             <TextView
-                android:id="@+id/book_club_club_memo_tv"
+                android:id="@+id/book_club_club_books_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="14dp"
-                android:text="@string/title_club_memo"
+                android:text="@string/title_club_books"
                 android:textAppearance="@style/ta_sb_14_en"
-                app:layout_constraintStart_toStartOf="@+id/book_club_club_memo_based_tv"
-                app:layout_constraintTop_toTopOf="@+id/book_club_club_memo_based_tv" />
+                app:layout_constraintStart_toStartOf="@+id/book_club_club_books_based_tv"
+                app:layout_constraintTop_toTopOf="@+id/book_club_club_books_based_tv" />
 
             <TextView
                 android:id="@+id/book_club_more_tv"
@@ -116,9 +116,9 @@
                 android:text="@string/action_more"
                 android:textAppearance="@style/ta_b_10_kr"
                 android:textColor="@color/primary_light"
-                app:layout_constraintBottom_toBottomOf="@+id/book_club_club_memo_tv"
-                app:layout_constraintEnd_toEndOf="@+id/book_club_club_memo_based_tv"
-                app:layout_constraintTop_toTopOf="@+id/book_club_club_memo_tv" />
+                app:layout_constraintBottom_toBottomOf="@+id/book_club_club_books_tv"
+                app:layout_constraintEnd_toEndOf="@+id/book_club_club_books_based_tv"
+                app:layout_constraintTop_toTopOf="@+id/book_club_club_books_tv" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/book_club_book_rv"
@@ -132,10 +132,10 @@
                 android:overScrollMode="never"
                 android:scrollbars="none"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="@+id/book_club_club_memo_based_tv"
-                app:layout_constraintEnd_toEndOf="@+id/book_club_club_memo_based_tv"
-                app:layout_constraintStart_toStartOf="@+id/book_club_club_memo_based_tv"
-                app:layout_constraintTop_toBottomOf="@+id/book_club_club_memo_tv"
+                app:layout_constraintBottom_toBottomOf="@+id/book_club_club_books_based_tv"
+                app:layout_constraintEnd_toEndOf="@+id/book_club_club_books_based_tv"
+                app:layout_constraintStart_toStartOf="@+id/book_club_club_books_based_tv"
+                app:layout_constraintTop_toBottomOf="@+id/book_club_club_books_tv"
                 tools:listitem="@layout/item_book_ver_club" />
 
             <TextView
@@ -145,10 +145,9 @@
                 android:layout_margin="20dp"
                 android:background="@drawable/bg_grey_10_null_null"
                 android:gravity="center"
-                android:text="@string/msg_no_trending_memo"
                 android:textAppearance="@style/ta_r_14_kr"
                 android:textColor="@color/grey_dark"
-                app:layout_constraintTop_toBottomOf="@+id/book_club_club_memo_based_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/book_club_club_books_based_tv" />
 
             <TextView
                 android:id="@+id/book_club_trending_memo_tv"

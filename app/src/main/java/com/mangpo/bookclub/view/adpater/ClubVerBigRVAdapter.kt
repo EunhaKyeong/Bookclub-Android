@@ -11,7 +11,7 @@ import com.mangpo.bookclub.R
 import com.mangpo.bookclub.databinding.ItemClubVerBigBinding
 import com.mangpo.bookclub.databinding.ItemNoClubVerBigBinding
 import com.mangpo.bookclub.model.entities.ClubEntity
-import com.mangpo.bookclub.utils.ClubViewType
+import com.mangpo.bookclub.config.ClubViewType
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -32,14 +32,14 @@ class ClubVerBigRVAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return if (viewType==ClubViewType.CLUB)
+        return if (viewType== ClubViewType.CLUB)
             ClubViewHolder(ItemClubVerBigBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         else
             EmptyClubViewHolder(ItemNoClubVerBigBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (clubs[position].viewType==ClubViewType.CLUB) {
+        if (clubs[position].viewType== ClubViewType.CLUB) {
             (holder as ClubViewHolder).root.setOnClickListener {
                 myClickListener.goClubDetailView(clubs[position].clubId!!)
             }

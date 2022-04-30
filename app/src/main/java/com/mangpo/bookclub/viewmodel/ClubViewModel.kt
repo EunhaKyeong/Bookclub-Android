@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.mangpo.bookclub.model.entities.CreateClubEntity
 import com.mangpo.bookclub.model.remote.Club
 import com.mangpo.bookclub.model.remote.ClubInfo
+import com.mangpo.bookclub.model.remote.CreateClubResponse
+import com.mangpo.bookclub.model.remote.Member
 import com.mangpo.bookclub.repository.ClubRepositoryImpl
 import com.mangpo.bookclub.utils.LogUtil
 
@@ -22,6 +24,11 @@ class ClubViewModel: BaseViewModel() {
 
     private val _clubInfo: MutableLiveData<ClubInfo> = MutableLiveData()
     val clubInfo: LiveData<ClubInfo> get() = _clubInfo
+
+    private val _memberInfo: MutableLiveData<Member> = MutableLiveData()
+    val memberInfo: LiveData<Member> get() = _memberInfo
+
+    private lateinit var newClub: CreateClubResponse
 
     fun getClubsByUser(userId: Int) {
         repository.getClubsByUser(
@@ -41,6 +48,10 @@ class ClubViewModel: BaseViewModel() {
             club = club,
             onResponse = {
                 LogUtil.d("ClubViewModel", "createClub Success!\ncode: ${it.code()}\nbody: ${it.body()}")
+
+                if (it.code()==201)
+                    newClub = it.body()!!
+
                 _createClubCode.value = Event(it.code())
             },
             onFailure = {
@@ -77,4 +88,21 @@ class ClubViewModel: BaseViewModel() {
             }
         )
     }
+
+    fun getClubUserInfo(clubId: Int, userId: Int) {
+        repository.getClubUserInfo(
+            clubId = clubId,
+            userId = userId,
+            onResponse = {
+                LogUtil.d("ClubViewModel", "getClubUserInfo Success!\ncode: ${it.code()}\nbody: ${it.body()}")
+                _memberInfo.value = it.body()!!.data
+            },
+            onFailure = {
+                LogUtil.e("ClubViewModel", "getClubUserInfo Fail!\nmessage: ${it.message}")
+                _memberInfo.value = null
+            }
+        )
+    }
+
+    fun getNewClubId(): Int = newClub.id
 }

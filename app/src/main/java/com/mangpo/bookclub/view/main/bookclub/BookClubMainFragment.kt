@@ -8,9 +8,9 @@ import com.mangpo.bookclub.databinding.FragmentBookClubMainBinding
 import com.mangpo.bookclub.model.entities.ClubEntity
 import com.mangpo.bookclub.model.entities.ClubMember
 import com.mangpo.bookclub.model.remote.Club
-import com.mangpo.bookclub.utils.ClubViewType
+import com.mangpo.bookclub.config.ClubViewType
+import com.mangpo.bookclub.config.GlobalVariable
 import com.mangpo.bookclub.utils.LogUtil
-import com.mangpo.bookclub.utils.PrefsUtils
 import com.mangpo.bookclub.view.BaseFragment
 import com.mangpo.bookclub.view.adpater.ClubVerBigRVAdapter
 import com.mangpo.bookclub.viewmodel.ClubViewModel
@@ -19,14 +19,18 @@ class BookClubMainFragment : BaseFragment<FragmentBookClubMainBinding>(FragmentB
     private lateinit var clubVerBigAdapter: ClubVerBigRVAdapter
 
     private val clubVm: ClubViewModel by viewModels<ClubViewModel>()
-    private val clubs: ArrayList<ClubEntity> = arrayListOf(ClubEntity(), ClubEntity(), ClubEntity())
+    private var clubs: ArrayList<ClubEntity> = arrayListOf(ClubEntity(), ClubEntity(), ClubEntity())
 
     override fun initAfterBinding() {
         observe()
         initAdapter()
         setMyEventListener()
+    }
 
-        clubVm.getClubsByUser(PrefsUtils.getUserId())
+    override fun onResume() {
+        super.onResume()
+
+        clubVm.getClubsByUser(GlobalVariable.userId)
     }
 
     private fun initAdapter() {
@@ -68,6 +72,8 @@ class BookClubMainFragment : BaseFragment<FragmentBookClubMainBinding>(FragmentB
     }
 
     private fun mappingClub(clubs: ArrayList<Club>) {
+        this.clubs = arrayListOf(ClubEntity(), ClubEntity(), ClubEntity())
+
         clubs.forEachIndexed{ index, club ->
             this.clubs[index].viewType = ClubViewType.CLUB
             this.clubs[index].clubId = club.id
@@ -84,6 +90,7 @@ class BookClubMainFragment : BaseFragment<FragmentBookClubMainBinding>(FragmentB
     private fun observe() {
         clubVm.clubList.observe(viewLifecycleOwner, Observer {
             LogUtil.d("BookClubMainFragment", "clubList Observe! -> $it")
+
             mappingClub(it)
         })
     }

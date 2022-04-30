@@ -47,7 +47,10 @@ class CreateBookClubFragment : BaseFragment<FragmentCreateBookClubBinding>(Fragm
                 loadingDialogFragment.dismiss()
 
                 when (code) {
-                    201 -> findNavController().navigate(R.id.action_createBookClubFragment_to_bookClubFragment)
+                    201 -> {
+                        val action = CreateBookClubFragmentDirections.actionCreateBookClubFragmentToClubCreationSuccessDialogFragment(clubVm.getNewClubId())
+                        findNavController().navigate(action)
+                    }
                     400 -> showToast("이미 존재하는 클럽 이름입니다.")
                     else -> showToast(getString(R.string.error_api))
                 }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_layout_gradation"
+    tools:context=".view.main.bookclub.InviteMemberFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/invite_member_tb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="@string/title_member_info"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ta_eb_18_kr"
+        app:titleTextColor="@color/primary" />
+
+    <TextView
+        android:id="@+id/invite_member_complete_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="9dp"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:text="@string/action_complete"
+        android:textAppearance="@style/ta_b_14_kr"
+        app:layout_constraintBottom_toBottomOf="@+id/invite_member_tb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/invite_member_tb" />
+
+    <TextView
+        android:id="@+id/invite_member_input_email_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/msg_input_member_email"
+        android:textAppearance="@style/ta_b_16_kr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invite_member_tb" />
+
+    <EditText
+        android:id="@+id/invite_member_email_et"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_grey_10_null_null"
+        android:hint="@string/title_email_example"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="10dp"
+        android:textAppearance="@style/ta_r_14_en"
+        android:textColor="@color/primary"
+        android:textColorHint="@color/grey_dark"
+        app:layout_constraintTop_toBottomOf="@+id/invite_member_input_email_tv" />
+
+    <TextView
+        android:id="@+id/invite_member_error_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="4dp"
+        android:text="존재하지 않는 이메일 입니다."
+        android:textAppearance="@style/ta_r_10_kr"
+        android:textColor="@color/secondary"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invite_member_email_et" />
+
+    <TextView
+        android:id="@+id/invite_member_input_message_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/msg_input_invite_message"
+        android:textAppearance="@style/ta_b_16_kr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invite_member_error_tv" />
+
+    <EditText
+        android:id="@+id/invite_member_message_et"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_grey_10_null_null"
+        android:hint="@string/msg_input_invite_message_hint"
+        android:inputType="text"
+        android:lineSpacingExtra="4dp"
+        android:maxLength="50"
+        android:paddingHorizontal="10dp"
+        android:textAppearance="@style/ta_r_14_kr"
+        android:textColor="@color/primary"
+        android:textColorHint="@color/grey_dark"
+        app:layout_constraintTop_toBottomOf="@+id/invite_member_input_message_tv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

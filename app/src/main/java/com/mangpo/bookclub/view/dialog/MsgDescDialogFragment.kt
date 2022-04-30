@@ -8,23 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import com.mangpo.bookclub.databinding.FragmentInviteCompleteDialogBinding
+import androidx.navigation.fragment.navArgs
+import com.mangpo.bookclub.databinding.FragmentMsgDescDialogBinding
 import com.mangpo.bookclub.utils.DialogFragmentUtils
 
-class InviteCompleteDialogFragment : DialogFragment() {
-    private lateinit var binding: FragmentInviteCompleteDialogBinding
+class MsgDescDialogFragment : DialogFragment() {
+    private val args: MsgDescDialogFragmentArgs by navArgs()
+
+    private lateinit var binding: FragmentMsgDescDialogBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentInviteCompleteDialogBinding.inflate(inflater, container, false)
+        binding = FragmentMsgDescDialogBinding.inflate(inflater, container, false)
 
         //다이얼로그 프래그먼트 모서리 둥글게
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
-        binding.inviteCompleteCompleteTv.setOnClickListener {
+        binding.msgDescMsgTv.text = args.title
+        binding.msgDescDescTv.text = args.desc
+
+        binding.msgDescConfirmTv.setOnClickListener {
             dismiss()
         }
 
@@ -37,10 +43,9 @@ class InviteCompleteDialogFragment : DialogFragment() {
         //전체 프래그먼트 크기 설정
         DialogFragmentUtils.dialogFragmentResize(
             requireContext(),
-            this@InviteCompleteDialogFragment,
-            0.71f,
-            0.23f
+            this@MsgDescDialogFragment,
+            0.74f,
+            0.13f
         )
     }
-
 }

@@ -42,7 +42,7 @@
         android:maxLines="1"
         android:paddingHorizontal="16dp"
         android:text="@string/msg_select_book"
-        android:textAppearance="@style/ta_b_14_kr"
+        android:textAppearance="@style/ta_b_12_kr"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/record_tb" />
 

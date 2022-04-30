@@ -33,18 +33,15 @@
         android:name="com.mangpo.bookclub.view.main.bookclub.ClubInfoFragment"
         android:label="fragment_club_info"
         tools:layout="@layout/fragment_club_info" >
-        <argument
-            android:name="role"
-            app:argType="string" />
-        <argument
-            android:name="isFirst"
-            app:argType="boolean" />
-        <action
-            android:id="@+id/action_clubInfoFragment_to_inviteMemDialogFragment"
-            app:destination="@id/inviteMemDialogFragment" />
         <action
             android:id="@+id/action_clubInfoFragment_to_memberInfoFragment"
             app:destination="@id/memberInfoFragment" />
+        <argument
+            android:name="clubInfo"
+            app:argType="com.mangpo.bookclub.model.entities.ClubInfoEntity" />
+        <action
+            android:id="@+id/action_clubInfoFragment_to_inviteMemberFragment"
+            app:destination="@id/inviteMemberFragment" />
     </fragment>
     <fragment
         android:id="@+id/initFragment"
@@ -87,20 +84,9 @@
         android:label="fragment_create_book_club"
         tools:layout="@layout/fragment_create_book_club" >
         <action
-            android:id="@+id/action_createBookClubFragment_to_bookClubFragment"
-            app:destination="@id/bookClubFragment"
-            app:popUpTo="@id/initFragment"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_createBookClubFragment_to_clubCreationSuccessDialogFragment"
+            app:destination="@id/clubCreationSuccessDialogFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/inviteMemDialogFragment"
-        android:name="com.mangpo.bookclub.view.dialog.InviteMemDialogFragment"
-        android:label="fragment_invite_mem_dialog"
-        tools:layout="@layout/fragment_invite_mem_dialog" >
-        <action
-            android:id="@+id/action_inviteMemDialogFragment_to_inviteCompleteDialogFragment"
-            app:destination="@id/inviteCompleteDialogFragment" />
-    </dialog>
     <dialog
         android:id="@+id/inviteCompleteDialogFragment"
         android:name="com.mangpo.bookclub.view.dialog.InviteCompleteDialogFragment"
@@ -110,10 +96,44 @@
         android:id="@+id/memberInfoFragment"
         android:name="com.mangpo.bookclub.view.main.bookclub.MemberInfoFragment"
         android:label="fragment_member_info"
-        tools:layout="@layout/fragment_member_info" />
+        tools:layout="@layout/fragment_member_info" >
+        <argument
+            android:name="memberId"
+            app:argType="integer" />
+        <argument
+            android:name="clubId"
+            app:argType="integer" />
+        <argument
+            android:name="isPresident"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
     <fragment
         android:id="@+id/bookClubLibraryFragment"
         android:name="com.mangpo.bookclub.view.main.bookclub.BookClubLibraryFragment"
         android:label="fragment_book_club_library"
         tools:layout="@layout/fragment_book_club_library" />
+    <fragment
+        android:id="@+id/inviteMemberFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.InviteMemberFragment"
+        android:label="fragment_invite_member"
+        tools:layout="@layout/fragment_invite_member" >
+        <action
+            android:id="@+id/action_inviteMemberFragment_to_inviteCompleteDialogFragment"
+            app:destination="@id/inviteCompleteDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clubCreationSuccessDialogFragment"
+        android:name="com.mangpo.bookclub.view.dialog.ClubCreationSuccessDialogFragment"
+        android:label="fragment_club_creation_success_dialog"
+        tools:layout="@layout/fragment_club_creation_success_dialog" >
+        <action
+            android:id="@+id/action_clubCreationSuccessDialogFragment_to_bookClubFragment"
+            app:destination="@id/bookClubFragment"
+            app:popUpTo="@id/initFragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="clubId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/invite_complete_iv"
-        android:layout_width="46dp"
-        android:layout_height="34dp"
-        android:src="@drawable/ic_email"
+        android:layout_width="143dp"
+        android:layout_height="69dp"
+        android:src="@drawable/ic_congratulation_character_color"
         app:layout_constraintBottom_toTopOf="@+id/invite_complete_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,9 +22,9 @@
         android:id="@+id/invite_complete_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
         android:gravity="center"
-        android:text="hi06021님께\n초대장이 전송되었습니다."
+        android:text="@string/msg_send_invite_message"
         android:textAppearance="@style/ta_b_16_kr"
         app:layout_constraintBottom_toTopOf="@+id/invite_complete_desc_tv"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,12 +35,31 @@
         android:id="@+id/invite_complete_desc_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         android:text="@string/msg_invite_mem_desc"
         android:textAppearance="@style/ta_r_12_kr"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/invite_complete_line_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/invite_complete_tv" />
+
+    <View
+        android:id="@+id/invite_complete_line_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_dark"
+        android:layout_marginHorizontal="14dp"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/invite_complete_complete_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/action_complete"
+        android:textAppearance="@style/ta_r_14_kr"
+        app:layout_constraintTop_toBottomOf="@+id/invite_complete_line_view"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

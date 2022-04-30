@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.mangpo.bookclub.R
+import com.mangpo.bookclub.config.GlobalVariable
 import com.mangpo.bookclub.databinding.FragmentBookClubSettingBinding
 import com.mangpo.bookclub.model.entities.ClubShortEntity
 import com.mangpo.bookclub.model.remote.Club
@@ -32,7 +33,7 @@ class BookClubSettingFragment :
         initAdapter()
         setMyEventListener()
 
-        clubVm.getClubsByUser(PrefsUtils.getUserId())
+        clubVm.getClubsByUser(GlobalVariable.userId)
     }
 
     private fun initAdapter() {
@@ -81,7 +82,7 @@ class BookClubSettingFragment :
         memberClubs.clear()
 
         for (club in clubs) {
-            if (club.presidentId==PrefsUtils.getUserId())
+            if (club.presidentId==GlobalVariable.userId)
                 presidentClubs.add(ClubShortEntity(club.id, club.name, dateFormatting(club.createdDate)))
             else
                 memberClubs.add(ClubShortEntity(club.id, club.name, dateFormatting(club.createdDate)))
@@ -90,7 +91,7 @@ class BookClubSettingFragment :
 
     private fun dateFormatting(date: String): String {
         val formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-        val formatter2 = DateTimeFormatter.ofPattern("yyyy년 MM년 dd일 개설")
+        val formatter2 = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 개설")
         val date: LocalDateTime = LocalDateTime.parse(date.substring(0, 19), formatter1)
 
         return  date.format(formatter2)
@@ -137,7 +138,7 @@ class BookClubSettingFragment :
 
             if (code!=null) {
                 when (code) {
-                    204 -> clubVm.getClubsByUser(PrefsUtils.getUserId())
+                    204 -> clubVm.getClubsByUser(GlobalVariable.userId)
                     else -> showToast(getString(R.string.error_api))
                 }
             }
