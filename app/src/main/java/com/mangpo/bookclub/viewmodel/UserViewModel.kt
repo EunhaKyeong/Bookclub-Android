@@ -2,6 +2,7 @@ package com.mangpo.bookclub.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.mangpo.bookclub.config.GlobalVariable
 import com.mangpo.bookclub.model.entities.User
 import com.mangpo.bookclub.model.remote.UserResponse
 import com.mangpo.bookclub.repository.UserRepositoryImpl
@@ -35,7 +36,7 @@ class UserViewModel: BaseViewModel() {
 
                 if (it.code()==200) {
                     user = it.body()!!.data
-                    PrefsUtils.setUserId(user!!.userId)
+                    GlobalVariable.userId = user!!.userId
                 } else
                     user = null
 

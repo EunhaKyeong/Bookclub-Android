@@ -99,6 +99,8 @@
     <string name="title_club_name">클럽명</string>
     <string name="title_club_introduce">클럽 한줄 소개 및 다짐</string>
     <string name="title_member_info">클럽원 활동 정보</string>
+    <string name="title_club_books">Club Books</string>
+    <string name="title_email_example">ex) ourpage@gmail.com</string>
 
     <string name="action_login_en">LOG IN</string>
     <string name="action_signin">회원가입</string>
@@ -207,4 +209,9 @@
     <string name="msg_input_email2">이메일을 입력해주세요.</string>
     <string name="msg_invite_mem_desc">상대방이 수락하면 클럽원이 추가됩니다!</string>
     <string name="msg_club_exceed">북클럽은 3개까지\n개설 / 가입 가능합니다.</string>
+    <string name="msg_input_invite_message">초대메세지를 입력해주세요.</string>
+    <string name="msg_input_invite_message_hint">ex) our page에서 함께 책 읽자!\n입력하지 않으시면 기본 메세지가 전송됩니다.</string>
+    <string name="msg_book_club_creation_success">북클럽 생성 완료</string>
+    <string name="msg_confirm_new_book_club">생성된 북클럽을 확인해보세요!</string>
+    <string name="msg_send_invite_message">초대장이 전송되었습니다.</string>
 </resources>

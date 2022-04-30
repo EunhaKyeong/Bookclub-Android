@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_dialog_fragment"
+    tools:context=".view.dialog.MsgDescDialogFragment">
+
+    <TextView
+        android:id="@+id/msg_desc_msg_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/ta_b_16_kr"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/msg_desc_line_view"/>
+
+    <TextView
+        android:id="@+id/msg_desc_desc_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:textAppearance="@style/ta_r_12_kr"
+        app:layout_constraintTop_toBottomOf="@+id/msg_desc_msg_tv" />
+
+    <View
+        android:id="@+id/msg_desc_line_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="14dp"
+        android:background="@color/grey_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68" />
+
+    <TextView
+        android:id="@+id/msg_desc_confirm_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/action_confirm"
+        android:textAppearance="@style/ta_r_14_kr"
+        android:textColor="@color/secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/msg_desc_line_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
