@@ -22,7 +22,22 @@ class BookCategoryBottomSheetFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBookCategoryBottomSheetBinding.inflate(inflater, container, false)
+        setMyEventListener()
 
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding.bookCategoryRg.clearCheck()
+    }
+
+    override fun getTheme(): Int {
+        return R.style.BottomSheetDialog
+    }
+
+    private fun setMyEventListener() {
         binding.bookCategoryBtn.setOnClickListener {
             when (binding.bookCategoryRg.checkedRadioButtonId) {
                 R.id.book_category_reading_rb -> {
@@ -41,11 +56,9 @@ class BookCategoryBottomSheetFragment : BottomSheetDialogFragment() {
             }
         }
 
-        return binding.root
-    }
-
-    override fun getTheme(): Int {
-        return R.style.BottomSheetDialog
+        binding.bookCategoryRg.setOnCheckedChangeListener { radioGroup, i ->
+            binding.bookCategoryBtn.isEnabled = radioGroup.checkedRadioButtonId!=-1
+        }
     }
 
     fun setMyDialogCallback(myDialogCallback: MyDialogCallback) {

@@ -69,8 +69,10 @@
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_grey_10_null_null"
+        android:enabled="false"
+        android:background="@drawable/selector_book_category_btn"
         android:text="@string/action_add_book"
+        android:textColor="@drawable/selector_book_category_btn_text"
         android:textAppearance="@style/ta_b_14_kr"
         app:layout_constraintTop_toBottomOf="@+id/book_category_rg" />
 
