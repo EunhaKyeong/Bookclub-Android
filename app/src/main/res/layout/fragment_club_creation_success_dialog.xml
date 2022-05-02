@@ -7,6 +7,14 @@
     android:background="@drawable/bg_dialog_fragment"
     tools:context=".view.dialog.ClubCreationSuccessDialogFragment">
 
+    <ImageView
+        android:id="@+id/club_creation_success_flip_book_iv"
+        android:layout_width="147dp"
+        android:layout_height="147dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/club_creation_success_title_tv"
         android:layout_width="match_parent"
@@ -14,9 +22,9 @@
         android:gravity="center"
         android:text="@string/msg_book_club_creation_success"
         android:textAppearance="@style/ta_b_16_kr"
-        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintBottom_toTopOf="@+id/club_creation_success_line_view"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/club_creation_success_line_view"/>
+        app:layout_constraintVertical_bias="0.77" />
 
     <TextView
         android:id="@+id/club_creation_success_desc_tv"
@@ -24,8 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:gravity="center"
-        android:textAppearance="@style/ta_r_12_kr"
         android:text="@string/msg_confirm_new_book_club"
+        android:textAppearance="@style/ta_r_12_kr"
         app:layout_constraintTop_toBottomOf="@+id/club_creation_success_title_tv" />
 
     <View
@@ -36,7 +44,7 @@
         android:background="@color/grey_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.82" />
 
     <TextView
         android:id="@+id/club_creation_success_next_tv"

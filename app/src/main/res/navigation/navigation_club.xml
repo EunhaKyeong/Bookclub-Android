@@ -122,7 +122,7 @@
             android:id="@+id/action_inviteMemberFragment_to_inviteCompleteDialogFragment"
             app:destination="@id/inviteCompleteDialogFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/clubCreationSuccessDialogFragment"
         android:name="com.mangpo.bookclub.view.dialog.ClubCreationSuccessDialogFragment"
         android:label="fragment_club_creation_success_dialog"
@@ -135,5 +135,5 @@
         <argument
             android:name="clubId"
             app:argType="integer" />
-    </fragment>
+    </dialog>
 </navigation>

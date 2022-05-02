@@ -30,6 +30,7 @@ class RecordPhotoVPAdapter(): RecyclerView.Adapter<RecordPhotoVPAdapter.RecordPh
         holder: RecordPhotoVPAdapter.RecordPhotoViewHolder,
         position: Int
     ) {
+        holder.image.clipToOutline = true
         Glide.with(binding.root.context).load(photos[position]).into((holder.image))
         holder.image.setOnClickListener {
             myClickListener.goPhotoActivity(photos, position)
