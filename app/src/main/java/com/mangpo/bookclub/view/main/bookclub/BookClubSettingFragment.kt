@@ -11,7 +11,6 @@ import com.mangpo.bookclub.databinding.FragmentBookClubSettingBinding
 import com.mangpo.bookclub.model.entities.ClubShortEntity
 import com.mangpo.bookclub.model.remote.Club
 import com.mangpo.bookclub.utils.LogUtil
-import com.mangpo.bookclub.utils.PrefsUtils
 import com.mangpo.bookclub.view.BaseFragment
 import com.mangpo.bookclub.view.adpater.ClubVerSmallRVAdapter
 import com.mangpo.bookclub.view.dialog.ActionDialogFragment
@@ -48,8 +47,11 @@ class BookClubSettingFragment :
                 actionDialog.arguments = bundle
                 actionDialog.show(requireActivity().supportFragmentManager, null)
                 actionDialog.setMyDialogCallback(object : ActionDialogFragment.MyDialogCallback{
-                    override fun delete() {
+                    override fun action1() {
                         clubVm.deleteClub(clubId)
+                    }
+
+                    override fun action2() {
                     }
                 })
             }
