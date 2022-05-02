@@ -27,7 +27,6 @@ class PostViewModel: BaseViewModel() {
     val updateRecord: LiveData<RecordResponse> get() = _updateRecord
 
     fun createRecord(record: RecordRequest) {
-        LogUtil.d("PostViewModel", "createRecord record: $record")
         postRepository.createPost(
             record = record,
             onResponse = {

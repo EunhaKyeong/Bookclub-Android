@@ -103,6 +103,7 @@
     <string name="title_club_books">Club Books</string>
     <string name="title_email_example">ex) ourpage@gmail.com</string>
     <string name="title_alarm">알림</string>
+    <string name="title_public_setting">공개설정</string>
 
     <string name="action_login_en">LOG IN</string>
     <string name="action_signin">회원가입</string>

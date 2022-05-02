@@ -9,25 +9,31 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.gson.Gson
 import com.mangpo.bookclub.R
+import com.mangpo.bookclub.config.GlobalVariable
 import com.mangpo.bookclub.databinding.FragmentRecordSettingBinding
+import com.mangpo.bookclub.model.entities.ClubFilterEntity
 import com.mangpo.bookclub.model.entities.Link
 import com.mangpo.bookclub.model.entities.RecordRequest
 import com.mangpo.bookclub.model.entities.RecordUpdateRequest
 import com.mangpo.bookclub.model.remote.Book
+import com.mangpo.bookclub.model.remote.Club
 import com.mangpo.bookclub.model.remote.RecordResponse
 import com.mangpo.bookclub.utils.ImgUtils.getAbsolutePathByBitmap
 import com.mangpo.bookclub.utils.ImgUtils.uriToBitmap
 import com.mangpo.bookclub.utils.LogUtil
 import com.mangpo.bookclub.utils.isNetworkAvailable
 import com.mangpo.bookclub.view.BaseFragment
+import com.mangpo.bookclub.view.adpater.ClubCBRVAdapter
 import com.mangpo.bookclub.view.adpater.LinkRVAdapter
 import com.mangpo.bookclub.view.dialog.ActionDialogFragment
 import com.mangpo.bookclub.viewmodel.BookViewModel
+import com.mangpo.bookclub.viewmodel.ClubViewModel
 import com.mangpo.bookclub.viewmodel.PostViewModel
 
 class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(FragmentRecordSettingBinding::inflate) {
     private val bookVm: BookViewModel by viewModels<BookViewModel>()
     private val postVm: PostViewModel by viewModels<PostViewModel>()
+    private val clubVm: ClubViewModel by viewModels<ClubViewModel>()
     private val args: RecordSettingFragmentArgs by navArgs()
 
     private var clickedLinkPosition: Int? = null
@@ -37,10 +43,13 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
     private lateinit var recordVerUpdate: RecordResponse
     private lateinit var linkRVAdapter: LinkRVAdapter
     private lateinit var actionDialog: ActionDialogFragment
+    private lateinit var clubCbRVAdapter: ClubCBRVAdapter
 
     override fun initAfterBinding() {
         initActionDialog()
         initAdapter()
+
+        clubVm.getClubsByUser(GlobalVariable.userId)
 
         if (args.mode=="CREATE" && ::recordVerCreate.isInitialized)
             bindRecordVerCreate()
@@ -100,6 +109,9 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
         })
 
         binding.recordSettingLinkRv.adapter = linkRVAdapter
+
+        clubCbRVAdapter = ClubCBRVAdapter()
+        binding.recordSettingClubRv.adapter = clubCbRVAdapter
     }
 
     private fun setMyEventListener() {
@@ -234,6 +246,7 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
         recordVerCreate.scope = "PRIVATE"
         recordVerCreate.location = binding.recordSettingLocationEt.text.toString()
         recordVerCreate.readTime = binding.recordSettingTimeEt.text.toString()
+        recordVerCreate.clubIdListForScope = clubCbRVAdapter.getClickedClubs()
         recordVerCreate.linkRequestDtos = linkRVAdapter.getLinks()
 
         return recordVerCreate
@@ -256,8 +269,17 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
         title = recordVerUpdate.title,
         content = recordVerUpdate.content,
         postImgLocations = recordVerUpdate.postImgLocations,
-        clubIdListForScope = recordVerUpdate.clubIdListForScope
+        clubIdListForScope = clubCbRVAdapter.getClickedClubs()
     )
+
+    private fun mappingToClubFilterEntity(clubs: ArrayList<Club>): ArrayList<ClubFilterEntity> {
+        val clubEntities: ArrayList<ClubFilterEntity> = arrayListOf()
+        for (club in clubs) {
+            clubEntities.add(ClubFilterEntity(club.id, club.name))
+        }
+
+        return clubEntities
+    }
 
     private fun observe() {
         bookVm.createBookCode.observe(viewLifecycleOwner, Observer {
@@ -346,6 +368,15 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
                     recordVerUpdate.postImgLocations = postImgLocations
                     postVm.updatePost(recordVerUpdate.postId, setRecordUpdateRequest())
                 }
+            }
+        })
+
+        clubVm.clubList.observe(viewLifecycleOwner, Observer {
+            LogUtil.d("RecordSettingFragment", "clubList Observe! clubList -> $it")
+
+            if (it.isNotEmpty()) {
+                val clubs: ArrayList<ClubFilterEntity> = mappingToClubFilterEntity(it)
+                clubCbRVAdapter.setData(clubs)
             }
         })
     }
