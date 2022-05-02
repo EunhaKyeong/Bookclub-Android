@@ -215,11 +215,16 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(FragmentRecordBinding
     }
 
     private fun validate() {
-        if (binding.recordSelectBookBtn.text==getString(R.string.msg_select_book))
-            showToast(getString(R.string.error_select_book))
-        else if (binding.recordTitleEt.text.isBlank() || binding.recordContentEt.text.isBlank())
-            showToast(getString(R.string.error_input_title_content))
-        else if (args.mode=="CREATE") {
+        if (binding.recordSelectBookBtn.text==getString(R.string.msg_select_book)) {
+            val action = RecordFragmentDirections.actionRecordFragmentToMsgDescDialogFragment(getString(R.string.title_alarm), getString(R.string.error_select_book))
+            findNavController().navigate(action)
+        } else if (binding.recordTitleEt.text.isBlank()) {
+            val action = RecordFragmentDirections.actionRecordFragmentToMsgDescDialogFragment(getString(R.string.title_alarm), getString(R.string.error_input_title))
+            findNavController().navigate(action)
+        } else if (binding.recordContentEt.text.isBlank()) {
+            val action = RecordFragmentDirections.actionRecordFragmentToMsgDescDialogFragment(getString(R.string.title_alarm), getString(R.string.error_input_content))
+            findNavController().navigate(action)
+        } else if (args.mode=="CREATE") {
             PrefsUtils.setTempRecord("")
             val action = RecordFragmentDirections.actionRecordFragmentToRecordSettingFragment("CREATE", Gson().toJson(setRecordVerCreate()), Gson().toJson(book), null)
             findNavController().navigate(action)

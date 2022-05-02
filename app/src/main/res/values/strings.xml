@@ -20,9 +20,10 @@
     <string name="error_different_new_pw">새로운 비밀번호가 서로 다릅니다.</string>
     <string name="error_exceed_img">이미지는 최대 4장까지 첨부할 수 있습니다.</string>
     <string name="error_select_book">책을 선택해 주세요.</string>
-    <string name="error_input_title_content">제목과 내용을 입력해주세요.</string>
     <string name="error_exceed_book_club_cnt">북클럽은 3개까지\n개설 / 가입 가능합니다.</string>
     <string name="error_not_sign_member">가입되지 않은 클럽원 입니다.</string>
+    <string name="error_input_title">제목을 입력해주세요.</string>
+    <string name="error_input_content">내용을 입력해주세요.</string>
 
     <string name="title_email">이메일</string>
     <string name="title_password">비밀번호</string>
@@ -101,6 +102,7 @@
     <string name="title_member_info">클럽원 활동 정보</string>
     <string name="title_club_books">Club Books</string>
     <string name="title_email_example">ex) ourpage@gmail.com</string>
+    <string name="title_alarm">알림</string>
 
     <string name="action_login_en">LOG IN</string>
     <string name="action_signin">회원가입</string>

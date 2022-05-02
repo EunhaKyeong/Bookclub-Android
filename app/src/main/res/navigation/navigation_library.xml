@@ -27,6 +27,9 @@
             android:name="book"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_recordFragment_to_msgDescDialogFragment"
+            app:destination="@id/msgDescDialogFragment" />
     </fragment>
     <activity
         android:id="@+id/photoViewActivity"
@@ -129,4 +132,16 @@
             android:id="@+id/action_bookDetailFragment_to_recordDetailFragment"
             app:destination="@id/recordDetailFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/msgDescDialogFragment"
+        android:name="com.mangpo.bookclub.view.dialog.MsgDescDialogFragment"
+        android:label="fragment_msg_desc_dialog"
+        tools:layout="@layout/fragment_msg_desc_dialog" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="desc"
+            app:argType="string" />
+    </dialog>
 </navigation>
