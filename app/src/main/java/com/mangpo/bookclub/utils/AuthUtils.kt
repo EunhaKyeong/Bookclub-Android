@@ -33,7 +33,9 @@ object AuthUtils {
 
     fun clear() {    //JWT, ID, password, userId 초기화
         with(encryptedPrefs.edit()) {
-            clear()
+            remove("TOKEN")
+            remove("email")
+            remove("password")
             apply()
         }
 
