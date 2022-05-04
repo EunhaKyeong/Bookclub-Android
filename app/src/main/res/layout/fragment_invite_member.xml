@@ -24,10 +24,12 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="9dp"
+        android:enabled="false"
         android:gravity="center"
         android:paddingHorizontal="10dp"
         android:text="@string/action_complete"
         android:textAppearance="@style/ta_b_14_kr"
+        android:textColor="@drawable/selector_invite_member_complete_tv_text"
         app:layout_constraintBottom_toBottomOf="@+id/invite_member_tb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/invite_member_tb" />

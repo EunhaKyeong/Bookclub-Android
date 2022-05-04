@@ -121,6 +121,9 @@
         <action
             android:id="@+id/action_inviteMemberFragment_to_inviteCompleteDialogFragment"
             app:destination="@id/inviteCompleteDialogFragment" />
+        <argument
+            android:name="clubId"
+            app:argType="integer" />
     </fragment>
     <dialog
         android:id="@+id/clubCreationSuccessDialogFragment"

@@ -29,7 +29,7 @@ class ClubInfoFragment : BaseFragment<FragmentClubInfoBinding>(FragmentClubInfoB
         }
 
         binding.clubInfoAddClubBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_clubInfoFragment_to_inviteMemberFragment)
+            findNavController().navigate(ClubInfoFragmentDirections.actionClubInfoFragmentToInviteMemberFragment(args.clubInfo.clubId))
         }
     }
 

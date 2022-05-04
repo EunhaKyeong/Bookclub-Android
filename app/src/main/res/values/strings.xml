@@ -24,6 +24,8 @@
     <string name="error_not_sign_member">가입되지 않은 클럽원 입니다.</string>
     <string name="error_input_title">제목을 입력해주세요.</string>
     <string name="error_input_content">내용을 입력해주세요.</string>
+    <string name="error_not_sign_user">아직 가입되지 않은 유저입니다.</string>
+    <string name="error_already_invited_member">이미 초대한 클럽원 입니다.</string>
 
     <string name="title_email">이메일</string>
     <string name="title_password">비밀번호</string>

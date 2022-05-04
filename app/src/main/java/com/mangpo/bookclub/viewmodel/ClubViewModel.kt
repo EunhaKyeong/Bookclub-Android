@@ -3,6 +3,7 @@ package com.mangpo.bookclub.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mangpo.bookclub.model.entities.CreateClubEntity
+import com.mangpo.bookclub.model.entities.InviteMemRequest
 import com.mangpo.bookclub.model.remote.Club
 import com.mangpo.bookclub.model.remote.ClubInfo
 import com.mangpo.bookclub.model.remote.CreateClubResponse
@@ -27,6 +28,9 @@ class ClubViewModel: BaseViewModel() {
 
     private val _memberInfo: MutableLiveData<Member> = MutableLiveData()
     val memberInfo: LiveData<Member> get() = _memberInfo
+
+    private val _inviteResultCode: MutableLiveData<Event<Int>> = MutableLiveData()
+    val inviteResultCode: LiveData<Event<Int>> get() = _inviteResultCode
 
     private lateinit var newClub: CreateClubResponse
 
@@ -100,6 +104,20 @@ class ClubViewModel: BaseViewModel() {
             onFailure = {
                 LogUtil.e("ClubViewModel", "getClubUserInfo Fail!\nmessage: ${it.message}")
                 _memberInfo.value = null
+            }
+        )
+    }
+
+    fun inviteMember(member: InviteMemRequest) {
+        repository.inviteMember(
+            inviteMem = member,
+            onResponse = {
+                LogUtil.d("ClubViewModel", "inviteMember Success!\ncode: ${it.code()}\nbody: ${it.body()}")
+                _inviteResultCode.postValue(Event(it.code()))
+            },
+            onFailure = {
+                LogUtil.e("ClubViewModel", "inviteMember Fail!\nmessage: ${it.message}")
+                _inviteResultCode.postValue(Event(600))
             }
         )
     }

@@ -12,7 +12,12 @@ import com.mangpo.bookclub.databinding.FragmentInviteCompleteDialogBinding
 import com.mangpo.bookclub.utils.DialogFragmentUtils
 
 class InviteCompleteDialogFragment : DialogFragment() {
+    interface MyCallbackListener {
+        fun complete()
+    }
+
     private lateinit var binding: FragmentInviteCompleteDialogBinding
+    private lateinit var myCallbackListener: MyCallbackListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +30,7 @@ class InviteCompleteDialogFragment : DialogFragment() {
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         binding.inviteCompleteCompleteTv.setOnClickListener {
+            myCallbackListener.complete()
             dismiss()
         }
 
@@ -43,4 +49,7 @@ class InviteCompleteDialogFragment : DialogFragment() {
         )
     }
 
+    fun setMyCallbackListener(myCallbackListener: MyCallbackListener) {
+        this.myCallbackListener = myCallbackListener
+    }
 }

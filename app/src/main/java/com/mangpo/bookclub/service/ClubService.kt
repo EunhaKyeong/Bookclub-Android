@@ -1,10 +1,8 @@
 package com.mangpo.bookclub.service
 
 import com.mangpo.bookclub.model.entities.CreateClubEntity
-import com.mangpo.bookclub.model.remote.ClubInfoResponse
-import com.mangpo.bookclub.model.remote.ClubListResponse
-import com.mangpo.bookclub.model.remote.CreateClubResponse
-import com.mangpo.bookclub.model.remote.MemberResponse
+import com.mangpo.bookclub.model.entities.InviteMemRequest
+import com.mangpo.bookclub.model.remote.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -18,6 +16,8 @@ interface ClubService {
 
     @POST("/clubs")
     fun createClub(@Body club: CreateClubEntity): Call<CreateClubResponse>
+    @POST("/invites")
+    fun inviteMember(@Body inviteMember: InviteMemRequest): Call<InviteMemResponse>
 
     @DELETE("/clubs/{clubId}")
     fun deleteClub(@Path("clubId") clubId: Int): Call<Void>
