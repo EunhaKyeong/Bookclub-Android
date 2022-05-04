@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mangpo.bookclub.R
 import com.mangpo.bookclub.databinding.ItemMemberBinding
 import com.mangpo.bookclub.model.entities.ClubMemberDetail
 
@@ -30,7 +32,10 @@ class MemberRVAdapter(): RecyclerView.Adapter<MemberRVAdapter.MemberViewHolder>(
     }
 
     override fun onBindViewHolder(holder: MemberRVAdapter.MemberViewHolder, position: Int) {
-        Glide.with(holder.itemView).load(members[position].profile).circleCrop().into(holder.profile)
+        if (members[position].profile==null)
+            holder.profile.setImageDrawable(ContextCompat.getDrawable(holder.root.context, R.drawable.bg_default_profile))
+        else
+            Glide.with(holder.itemView).load(members[position].profile).circleCrop().into(holder.profile)
         holder.nickname.text = members[position].nickname
         holder.introduce.text = members[position].introduce
 

@@ -1,6 +1,7 @@
 package com.mangpo.bookclub.view.main.bookclub
 
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -43,7 +44,10 @@ class MemberInfoFragment : BaseFragment<FragmentMemberInfoBinding>(FragmentMembe
     }
 
     private fun bind(member: Member) {
-        Glide.with(requireView()).load(member.userResponseDto.profileImgLocation).circleCrop().into(binding.memberInfoMemberIv)
+        if (member.userResponseDto.profileImgLocation==null)
+            binding.memberInfoMemberIv.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_default_profile))
+        else
+            Glide.with(requireView()).load(member.userResponseDto.profileImgLocation).circleCrop().into(binding.memberInfoMemberIv)
 
         if (args.isPresident) {
             binding.memberInfoPresTv.visibility = View.VISIBLE
