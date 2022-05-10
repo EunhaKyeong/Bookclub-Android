@@ -103,6 +103,8 @@ dependencies {
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
     //PhotoView
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    //CircleIndicator
+    implementation 'me.relex:circleindicator:2.1.6'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
