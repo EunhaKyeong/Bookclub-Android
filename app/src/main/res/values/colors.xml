@@ -9,9 +9,11 @@
     <color name="black_light">#7B8099</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white10">#1AFFFFFF</color>
+    <color name="white30">#4DFFFFFF</color>
     <color name="white50">#80FFFFFF</color>
     <color name="white_light">#FBFBFD</color>
     <color name="white_dark">#EAEBEE</color>
+    <color name="purple">#77637C</color>
 
     <color name="primary">#303860</color>
     <color name="primary50">#80303860</color>
@@ -21,7 +23,7 @@
     <color name="grey80">#CCEFF0F3</color>
     <color name="grey_dark">#C3C5D1</color>
 
-    <color name="secondary">#E5949D</color>
+    <color name="secondary">#FF909D</color>
 
     <color name="transparent">#00000000</color>
     <color name="ted_image_picker_primary">#E5949D</color>
