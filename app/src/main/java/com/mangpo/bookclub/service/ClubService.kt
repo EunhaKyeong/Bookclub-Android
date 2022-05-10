@@ -13,6 +13,8 @@ interface ClubService {
     fun getClubInfoByClubId(@Path("clubId") clubId: Int): Call<ClubInfoResponse>
     @GET("/clubs/{clubId}/users/{userId}/info")
     fun getClubUserInfo(@Path("clubId") clubId: Int, @Path("userId") userId: Int): Call<MemberResponse>
+    @GET("/invites")
+    fun getInvites(): Call<InviteResponse>
 
     @POST("/clubs")
     fun createClub(@Body club: CreateClubEntity): Call<CreateClubResponse>

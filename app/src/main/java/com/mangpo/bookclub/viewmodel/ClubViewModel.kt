@@ -4,10 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mangpo.bookclub.model.entities.CreateClubEntity
 import com.mangpo.bookclub.model.entities.InviteMemRequest
-import com.mangpo.bookclub.model.remote.Club
-import com.mangpo.bookclub.model.remote.ClubInfo
-import com.mangpo.bookclub.model.remote.CreateClubResponse
-import com.mangpo.bookclub.model.remote.Member
+import com.mangpo.bookclub.model.remote.*
 import com.mangpo.bookclub.repository.ClubRepositoryImpl
 import com.mangpo.bookclub.utils.LogUtil
 
@@ -31,6 +28,9 @@ class ClubViewModel: BaseViewModel() {
 
     private val _inviteResultCode: MutableLiveData<Event<Int>> = MutableLiveData()
     val inviteResultCode: LiveData<Event<Int>> get() = _inviteResultCode
+
+    private val _inviteList: MutableLiveData<List<Invite>> = MutableLiveData()
+    val inviteList: LiveData<List<Invite>> get() = _inviteList
 
     private lateinit var newClub: CreateClubResponse
 
@@ -118,6 +118,18 @@ class ClubViewModel: BaseViewModel() {
             onFailure = {
                 LogUtil.e("ClubViewModel", "inviteMember Fail!\nmessage: ${it.message}")
                 _inviteResultCode.postValue(Event(600))
+            }
+        )
+    }
+
+    fun getInviteList() {
+        repository.getInvites(
+            onResponse = {
+                LogUtil.d("ClubViewModel", "getInviteList Success!\ncode: ${it.code()}\nbody: ${it.body()}")
+                _inviteList.postValue(it.body()!!.data)
+            },
+            onFailure = {
+                LogUtil.e("ClubViewModel", "getInviteList Fail!\nmessage: ${it.message}")
             }
         )
     }

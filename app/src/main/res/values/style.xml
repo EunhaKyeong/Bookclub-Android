@@ -57,6 +57,10 @@
         <item name="android:fontFamily">@font/nanum_gothic_bold</item>
         <item name="android:textSize">14dp</item>
     </style>
+    <style name="ta_b_15_kr" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/nanum_gothic_bold</item>
+        <item name="android:textSize">15dp</item>
+    </style>
     <style name="ta_b_16_kr" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/nanum_gothic_bold</item>
         <item name="android:textSize">16dp</item>

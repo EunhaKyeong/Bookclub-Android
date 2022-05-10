@@ -124,6 +124,9 @@
         <action
             android:id="@+id/action_homeFragment_to_recordFragment"
             app:destination="@id/recordFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_alarmFragment"
+            app:destination="@id/alarmFragment" />
     </fragment>
 
     <activity
@@ -187,4 +190,22 @@
             android:name="desc"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/alarmFragment"
+        android:name="com.mangpo.bookclub.view.alarm.AlarmFragment"
+        android:label="fragment_alarm"
+        tools:layout="@layout/fragment_alarm" >
+        <action
+            android:id="@+id/action_alarmFragment_to_inviteListFragment"
+            app:destination="@id/inviteListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inviteListFragment"
+        android:name="com.mangpo.bookclub.view.main.bookclub.InviteListFragment"
+        android:label="fragment_invite_list"
+        tools:layout="@layout/fragment_invite_list" >
+        <argument
+            android:name="invites"
+            app:argType="com.mangpo.bookclub.model.remote.Invite[]" />
+    </fragment>
 </navigation>

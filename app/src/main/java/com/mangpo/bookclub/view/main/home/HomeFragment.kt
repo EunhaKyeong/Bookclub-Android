@@ -91,6 +91,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             val action = HomeFragmentDirections.actionHomeFragmentToRecordFragment("CREATE", null, null)
             findNavController().navigate(action)
         }
+
+        binding.homeAlarmIv.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_alarmFragment)
+        }
     }
 
     private fun initChecklistAdapter() {

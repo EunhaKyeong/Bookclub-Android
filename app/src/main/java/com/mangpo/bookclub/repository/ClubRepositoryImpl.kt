@@ -70,6 +70,25 @@ class ClubRepositoryImpl: ClubRepository {
         })
     }
 
+    override fun getInvites(
+        onResponse: (Response<InviteResponse>) -> Unit,
+        onFailure: (Throwable) -> Unit
+    ) {
+        clubService.getInvites().enqueue(object : Callback<InviteResponse> {
+            override fun onResponse(
+                call: Call<InviteResponse>,
+                response: Response<InviteResponse>
+            ) {
+                onResponse(response)
+            }
+
+            override fun onFailure(call: Call<InviteResponse>, t: Throwable) {
+                onFailure(t)
+            }
+
+        })
+    }
+
     override fun createClub(
         club: CreateClubEntity,
         onResponse: (Response<CreateClubResponse>) -> Unit,

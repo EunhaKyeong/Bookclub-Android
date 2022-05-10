@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_layout_gradation"
+    tools:context=".view.alarm.AlarmFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/alarm_tb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="@string/title_alarm_en"
+        app:titleCentered="true"
+        app:titleTextAppearance="@style/ta_eb_18_en"
+        app:titleTextColor="@color/primary" />
+
+    <TextView
+        android:id="@+id/alarm_setting_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingHorizontal="19dp"
+        android:text="@string/title_setting"
+        android:textAppearance="@style/ta_b_14_kr"
+        app:layout_constraintBottom_toBottomOf="@+id/alarm_tb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/alarm_tb" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/alarm_vp"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="22dp"
+        android:clipToPadding="true"
+        android:orientation="horizontal"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_tb" />
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/alarm_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="22dp"
+        android:gravity="start|bottom"
+        app:ci_drawable="@drawable/bg_white_circle"
+        app:ci_drawable_unselected="@drawable/bg_white30_circle"
+        app:layout_constraintBottom_toBottomOf="@id/alarm_vp"
+        app:layout_constraintStart_toStartOf="@+id/alarm_vp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

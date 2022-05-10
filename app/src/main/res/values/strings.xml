@@ -105,7 +105,13 @@
     <string name="title_club_books">Club Books</string>
     <string name="title_email_example">ex) ourpage@gmail.com</string>
     <string name="title_alarm">알림</string>
+    <string name="title_alarm_en">Alarm</string>
     <string name="title_public_setting">공개설정</string>
+    <string name="title_go_ourpage_user_guide">Our page.\n사용 가이드 바로가기</string>
+    <string name="title_ourpage_use_120_percent">아워페이지를 120% 활용하고싶다면?</string>
+    <string name="title_review_ourpage">소중한 리뷰로\n아워페이지를 응원해주세요!</string>
+    <string name="title_go_review">지금 바로 리뷰 남기러가기.</string>
+    <string name="title_invite_history">북클럽 초대내역</string>
 
     <string name="action_login_en">LOG IN</string>
     <string name="action_signin">회원가입</string>
@@ -133,6 +139,8 @@
     <string name="action_undo">되돌리기</string>
     <string name="action_invite_member">클럽원 초대하기</string>
     <string name="action_invite">초대하기</string>
+    <string name="action_reject">거절</string>
+    <string name="action_accept">수락</string>
 
     <string name="msg_input_email1">이메일 주소를 입력해 주세요.</string>
     <string name="msg_agree_privacy">이용약관 및 개인정보처리방침에 동의합니다.</string>
@@ -219,4 +227,5 @@
     <string name="msg_book_club_creation_success">북클럽 생성 완료</string>
     <string name="msg_confirm_new_book_club">생성된 북클럽을 확인해보세요!</string>
     <string name="msg_send_invite_message">초대장이 전송되었습니다.</string>
+    <string name="msg_book_club_message_arrive">북클럽 초대장이\n도착, 확인해보세요!</string>
 </resources>
