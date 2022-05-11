@@ -10,6 +10,6 @@ class BookClubInviteBannerFragment(private val invite: List<Invite>) : BaseFragm
             (requireParentFragment() as AlarmFragment).goInviteHistoryFragment(invite)
         }
 
-        binding.bookClubInviteBannerWhereClubTv.text = "${invite.size}개의 북클럽"
+        binding.bookClubInviteBannerArriveTv.text = "${invite.size}개의 북클럽에서\n당신을 기다리고 있어요!"
     }
 }

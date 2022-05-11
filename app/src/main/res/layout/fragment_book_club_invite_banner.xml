@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="130dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_secondary_20_null_null"
     tools:context=".view.alarm.BookClubInviteBannerFragment">
 
@@ -13,11 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="22dp"
         android:lineSpacingExtra="4dp"
-        android:text="@string/msg_book_club_message_arrive"
-        android:textColor="@color/white"
         android:textAppearance="@style/ta_b_16_kr"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/book_club_invite_banner_where_club_tv"
@@ -25,8 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:layout_marginBottom="46dp"
-        android:textColor="@color/white"
+        android:text="@string/msg_share_story_with_members"
         android:textAppearance="@style/ta_r_11_kr"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -36,9 +36,9 @@
         android:layout_height="0dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_mailbox_character"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
