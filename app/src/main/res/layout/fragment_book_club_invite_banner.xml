@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="130dp"
-    android:background="@drawable/bg_secondary_20_null_null"
+    android:background="@drawable/bg_secondary_10_null_null"
     tools:context=".view.alarm.BookClubInviteBannerFragment">
 
     <TextView

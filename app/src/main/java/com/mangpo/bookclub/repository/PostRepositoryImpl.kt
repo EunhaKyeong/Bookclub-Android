@@ -2,7 +2,7 @@ package com.mangpo.bookclub.repository
 
 import com.mangpo.bookclub.model.entities.RecordRequest
 import com.mangpo.bookclub.model.entities.RecordUpdateRequest
-import com.mangpo.bookclub.model.remote.RecordResponse
+import com.mangpo.bookclub.model.remote.PostDetail
 import com.mangpo.bookclub.service.ApiClient
 import com.mangpo.bookclub.service.PostService
 import com.mangpo.bookclub.utils.ImgUtils
@@ -16,18 +16,18 @@ class PostRepositoryImpl: PostRepository {
 
     override fun createPost(
         record: RecordRequest,
-        onResponse: (Response<RecordResponse>) -> Unit,
+        onResponse: (Response<PostDetail>) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        postService.createPost(record).enqueue(object : Callback<RecordResponse> {
+        postService.createPost(record).enqueue(object : Callback<PostDetail> {
             override fun onResponse(
-                call: Call<RecordResponse>,
-                response: Response<RecordResponse>
+                call: Call<PostDetail>,
+                response: Response<PostDetail>
             ) {
                 onResponse(response)
             }
 
-            override fun onFailure(call: Call<RecordResponse>, t: Throwable) {
+            override fun onFailure(call: Call<PostDetail>, t: Throwable) {
                 onFailure(t)
             }
         })
@@ -89,15 +89,15 @@ class PostRepositoryImpl: PostRepository {
     override fun updatePost(
         postId: Int,
         updateRecord: RecordUpdateRequest,
-        onResponse: (Response<RecordResponse>) -> Unit,
+        onResponse: (Response<PostDetail>) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        postService.updatePost(postId, updateRecord).enqueue(object : Callback<RecordResponse> {
-            override fun onResponse(call: Call<RecordResponse>, response: Response<RecordResponse>) {
+        postService.updatePost(postId, updateRecord).enqueue(object : Callback<PostDetail> {
+            override fun onResponse(call: Call<PostDetail>, response: Response<PostDetail>) {
                 onResponse(response)
             }
 
-            override fun onFailure(call: Call<RecordResponse>, t: Throwable) {
+            override fun onFailure(call: Call<PostDetail>, t: Throwable) {
                 onFailure(t)
             }
         })

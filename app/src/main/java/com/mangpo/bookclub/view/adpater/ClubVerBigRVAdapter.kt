@@ -11,7 +11,7 @@ import com.mangpo.bookclub.R
 import com.mangpo.bookclub.databinding.ItemClubVerBigBinding
 import com.mangpo.bookclub.databinding.ItemNoClubVerBigBinding
 import com.mangpo.bookclub.model.entities.ClubEntity
-import com.mangpo.bookclub.config.ClubViewType
+import com.mangpo.bookclub.config.ViewType
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -32,22 +32,29 @@ class ClubVerBigRVAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return if (viewType== ClubViewType.CLUB)
+        return if (viewType== ViewType.CLUB)
             ClubViewHolder(ItemClubVerBigBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         else
             EmptyClubViewHolder(ItemNoClubVerBigBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (clubs[position].viewType== ClubViewType.CLUB) {
+        if (clubs[position].viewType== ViewType.CLUB) {
             (holder as ClubViewHolder).root.setOnClickListener {
                 myClickListener.goClubDetailView(clubs[position].clubId!!)
             }
 
-            if (isNew(clubs[position].lastUpdatedDate))
-                holder.newIcon.visibility = View.VISIBLE
-            else
-                holder.newIcon.visibility = View.INVISIBLE
+            if (clubs[position].lastAddBookDate==null) {
+                if (isNew(clubs[position].lastUpdatedDate))
+                    holder.newIcon.visibility = View.VISIBLE
+                else
+                    holder.newIcon.visibility = View.INVISIBLE
+            } else {
+                if (isNew(clubs[position].lastAddBookDate!!))
+                    holder.newIcon.visibility = View.VISIBLE
+                else
+                    holder.newIcon.visibility = View.INVISIBLE
+            }
 
             holder.clubName.text = clubs[position].name
             holder.description.text = "\"${clubs[position].description}\""

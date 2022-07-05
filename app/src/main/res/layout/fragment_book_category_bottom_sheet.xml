@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="32dp"
-    android:paddingVertical="21dp"
     tools:context=".view.bottomsheet.BookCategoryBottomSheetFragment">
 
     <TextView
@@ -14,22 +13,25 @@
         android:layout_height="wrap_content"
         android:text="@string/title_book_option"
         android:textAppearance="@style/ta_eb_18_kr"
+        app:layout_constraintVertical_bias="0.125"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <RadioGroup
         android:id="@+id/book_category_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        app:layout_constraintVertical_bias="0.6"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/book_category_tv">
+        app:layout_constraintTop_toBottomOf="@+id/book_category_tv"
+        app:layout_constraintBottom_toTopOf="@+id/book_category_btn">
 
         <RadioButton
             android:id="@+id/book_category_reading_rb"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_weight="1"
             android:background="@drawable/selector_book_category"
             android:button="@null"
@@ -41,7 +43,7 @@
         <RadioButton
             android:id="@+id/book_category_read_complete_rb"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:background="@drawable/selector_book_category"
@@ -54,7 +56,7 @@
         <RadioButton
             android:id="@+id/book_category_read_before_rb"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_weight="1"
             android:background="@drawable/selector_book_category"
             android:button="@null"
@@ -67,13 +69,14 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/book_category_btn"
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="42dp"
         android:enabled="false"
+        android:layout_marginBottom="27dp"
+        android:stateListAnimator="@null"
         android:background="@drawable/selector_book_category_btn"
         android:text="@string/action_add_book"
         android:textColor="@drawable/selector_book_category_btn_text"
         android:textAppearance="@style/ta_b_14_kr"
-        app:layout_constraintTop_toBottomOf="@+id/book_category_rg" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="130dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_purple_20_null_null"
+    android:background="@drawable/bg_purple_10_null_null"
     tools:context=".view.alarm.UserGuideBannerFragment">
 
     <TextView

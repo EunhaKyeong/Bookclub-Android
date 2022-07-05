@@ -5,6 +5,15 @@
     android:id="@+id/navigation_club"
     app:startDestination="@id/initFragment">
 
+    <fragment
+        android:id="@+id/recordDetailFragment"
+        android:name="com.mangpo.bookclub.view.main.record.RecordDetailFragment"
+        android:label="fragment_record_detail"
+        tools:layout="@layout/fragment_record_detail">
+        <argument
+            android:name="record"
+            app:argType="com.mangpo.bookclub.model.domain.RecordDetail" />
+    </fragment>
     <activity
         android:id="@+id/settingActivity"
         android:name="com.mangpo.bookclub.view.setting.SettingActivity"
@@ -27,6 +36,9 @@
         <argument
             android:name="clubId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_bookClubFragment_to_recordDetailFragment"
+            app:destination="@id/recordDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/clubInfoFragment"
@@ -112,7 +124,17 @@
         android:id="@+id/bookClubLibraryFragment"
         android:name="com.mangpo.bookclub.view.main.bookclub.BookClubLibraryFragment"
         android:label="fragment_book_club_library"
-        tools:layout="@layout/fragment_book_club_library" />
+        tools:layout="@layout/fragment_book_club_library" >
+        <argument
+            android:name="books"
+            app:argType="com.mangpo.bookclub.model.remote.BookInClub[]" />
+        <argument
+            android:name="members"
+            app:argType="com.mangpo.bookclub.model.remote.UserResponse[]" />
+        <argument
+            android:name="clubName"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/inviteMemberFragment"
         android:name="com.mangpo.bookclub.view.main.bookclub.InviteMemberFragment"

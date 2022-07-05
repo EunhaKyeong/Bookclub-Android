@@ -8,11 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
-import com.google.gson.Gson
 import com.mangpo.bookclub.R
 import com.mangpo.bookclub.databinding.FragmentRecordDetailBinding
-import com.mangpo.bookclub.model.remote.Book
-import com.mangpo.bookclub.model.remote.RecordResponse
+import com.mangpo.bookclub.model.domain.Record
+import com.mangpo.bookclub.model.domain.RecordDetail
 import com.mangpo.bookclub.utils.*
 import com.mangpo.bookclub.view.BaseFragment
 import com.mangpo.bookclub.view.adpater.LinkVerDetailRVAdapter
@@ -28,19 +27,16 @@ class RecordDetailFragment : BaseFragment<FragmentRecordDetailBinding>(FragmentR
 
     private lateinit var recordPhotoVPAdapter: RecordPhotoVPAdapter
     private lateinit var actionDialogFragment: ActionDialogFragment
-    private lateinit var record: RecordResponse
-    private lateinit var book: Book
+    private lateinit var recordDetail: RecordDetail
 
     override fun initAfterBinding() {
+        recordDetail = args.record
+
         setMyEventListener()
         initAdapter()
         initActionDialogFragment()
-        observe()
-
-        record = Gson().fromJson(args.record, RecordResponse::class.java)
-        book = Gson().fromJson(args.book, Book::class.java)
-
         bind()
+        observe()
     }
 
     private fun initAdapter() {
@@ -73,7 +69,7 @@ class RecordDetailFragment : BaseFragment<FragmentRecordDetailBinding>(FragmentR
                     dismissLoadingDialog()
                     showNetworkSnackBar()
                 } else
-                    postVm.deletePost(record.postId)
+                    postVm.deletePost(recordDetail.recordId)
             }
 
             override fun action2() {
@@ -89,8 +85,7 @@ class RecordDetailFragment : BaseFragment<FragmentRecordDetailBinding>(FragmentR
         })
 
         binding.recordDetailUpdateBtn.setOnClickListener {
-            PrefsUtils.setTempRecord("")
-            val action = RecordDetailFragmentDirections.actionRecordDetailFragmentToRecordFragment("UPDATE", Gson().toJson(record), Gson().toJson(book))
+            val action = RecordDetailFragmentDirections.actionRecordDetailFragmentToRecordFragment(mappingToRecord(recordDetail))
             findNavController().navigate(action)
         }
 
@@ -99,19 +94,47 @@ class RecordDetailFragment : BaseFragment<FragmentRecordDetailBinding>(FragmentR
         }
     }
 
+    private fun mappingToRecord(recordDetail: RecordDetail): Record = Record(
+        postId = recordDetail.recordId,
+        bookTitle = recordDetail.bookName,
+        scope = recordDetail.scope,
+        location = recordDetail.location,
+        readTime = recordDetail.readTime,
+        title = recordDetail.title,
+        content = recordDetail.content,
+        photos = recordDetail.photos,
+        hyperlinks = recordDetail.hyperlinks,
+        clubIdList = recordDetail.clubList
+    )
+
     private fun bind() {
-        binding.recordDetailBookNameTv.text = book.name
+        binding.recordDetailBookNameTv.text = recordDetail.bookName
 
         val formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
         val formatter2 = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")
-        val date: LocalDateTime = LocalDateTime.parse(record.modifiedDate.substring(0, 19), formatter1)
+        val date: LocalDateTime = LocalDateTime.parse(recordDetail.date.substring(0, 19), formatter1)
         binding.recordDetailRecordDateTv.text = date.format(formatter2)
 
-        binding.recordDetailRecordTitleTv.text = record.title
+        if (recordDetail.writer==null) {
+            binding.recordDetailUpdateBtn.visibility = View.VISIBLE
+            binding.recordDetailDeleteBtn.visibility = View.VISIBLE
+            binding.recordDetailNicknameTv.visibility = View.INVISIBLE
+            binding.recordDetailNicknameTextTv.visibility = View.INVISIBLE
 
-        binding.recordDetailRecordContentTv.text = record.content
 
-        if (record.postImgLocations.isEmpty()) {
+        } else {
+            binding.recordDetailUpdateBtn.visibility = View.INVISIBLE
+            binding.recordDetailDeleteBtn.visibility = View.INVISIBLE
+            binding.recordDetailNicknameTv.text = recordDetail.writer
+            binding.recordDetailNicknameTv.visibility = View.VISIBLE
+            binding.recordDetailNicknameTextTv.visibility = View.VISIBLE
+        }
+
+        binding.recordDetailRecordTitleTv.text = recordDetail.title
+
+        binding.recordDetailRecordContentTv.text = recordDetail.content
+
+        if (recordDetail.photos.isEmpty()) {
             binding.recordDetailPhotoVp.visibility = View.GONE
             binding.recordDetailIndicator.visibility = View.GONE
         } else {
@@ -121,29 +144,29 @@ class RecordDetailFragment : BaseFragment<FragmentRecordDetailBinding>(FragmentR
             params.height = size
             binding.recordDetailPhotoVp.layoutParams = params
 
-            recordPhotoVPAdapter.setData(record.postImgLocations)
+            recordPhotoVPAdapter.setData(recordDetail.photos)
             binding.recordDetailIndicator.count = recordPhotoVPAdapter.itemCount
             binding.recordDetailPhotoVp.visibility = View.VISIBLE
             binding.recordDetailIndicator.visibility = View.VISIBLE
         }
 
-        if (record.location.isBlank()) {
+        if (recordDetail.location.isBlank()) {
             binding.recordDetailLocationTv.text = getString(R.string.msg_input_location)
             binding.recordDetailLocationTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey_dark))
         } else {
-            binding.recordDetailLocationTv.text = record.location
+            binding.recordDetailLocationTv.text = recordDetail.location
             binding.recordDetailLocationTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
         }
 
-        if (record.readTime.isBlank()) {
+        if (recordDetail.readTime.isBlank()) {
             binding.recordDetailTimeTv.text = getString(R.string.msg_input_time)
             binding.recordDetailTimeTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey_dark))
         } else {
-            binding.recordDetailTimeTv.text = record.readTime
+            binding.recordDetailTimeTv.text = recordDetail.readTime
             binding.recordDetailTimeTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
         }
 
-        if (record.linkResponseDtos.isEmpty()) {
+        if (recordDetail.hyperlinks.isEmpty()) {
             binding.recordDetailLinkHintTv.text = getString(R.string.msg_input_link)
             binding.recordDetailLinkHintTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey_dark))
 
@@ -152,7 +175,7 @@ class RecordDetailFragment : BaseFragment<FragmentRecordDetailBinding>(FragmentR
             binding.recordDetailLinkRv.visibility = View.GONE
         } else {
             val linkVerDetailRVAdapter: LinkVerDetailRVAdapter = LinkVerDetailRVAdapter()
-            linkVerDetailRVAdapter.setData(record.linkResponseDtos)
+            linkVerDetailRVAdapter.setData(recordDetail.hyperlinks)
             binding.recordDetailLinkRv.adapter = linkVerDetailRVAdapter
 
             binding.recordDetailLinkHintTv.visibility = View.GONE
@@ -166,11 +189,11 @@ class RecordDetailFragment : BaseFragment<FragmentRecordDetailBinding>(FragmentR
             LogUtil.d("RecordDetailFragment", "deletePostCode Observe! deletePostCode -> $it")
 
             if (it==204) {
-                if (record.postImgLocations.isEmpty()) {
+                if (recordDetail.photos.isEmpty()) {
                     dismissLoadingDialog()
                     findNavController().popBackStack()
                 } else
-                    postVm.deleteMultiplePhotos(record.postImgLocations)
+                    postVm.deleteMultiplePhotos(recordDetail.photos)
             } else {
                 dismissLoadingDialog()
                 showSnackBar(getString(R.string.error_api))
@@ -181,8 +204,8 @@ class RecordDetailFragment : BaseFragment<FragmentRecordDetailBinding>(FragmentR
             LogUtil.d("RecordDetailFragment", "deletePhotosCode Observe! deletePhotosCode -> $it")
             showToast(getString(R.string.msg_delete_record))
 
-            if (record.postImgLocations.isNotEmpty())
-                postVm.deleteMultiplePhotos(record.postImgLocations)
+            if (recordDetail.photos.isNotEmpty())
+                postVm.deleteMultiplePhotos(recordDetail.photos)
 
             dismissLoadingDialog()
             findNavController().popBackStack()

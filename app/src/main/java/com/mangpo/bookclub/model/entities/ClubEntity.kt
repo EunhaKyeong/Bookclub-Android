@@ -1,17 +1,18 @@
 package com.mangpo.bookclub.model.entities
 
 import android.os.Parcelable
-import com.mangpo.bookclub.config.ClubViewType
+import com.mangpo.bookclub.config.ViewType
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
 data class ClubEntity(
     var clubId: Int? = null,
-    var viewType: Int = ClubViewType.EMPTY,
+    var viewType: Int = ViewType.EMPTY,
     var name: String = "",
     var description: String = "",
     var level: Int = 0,
     val pageCnt: Int = 0,
+    var lastAddBookDate: String? = null,
     var lastUpdatedDate: String = "",
     var president: ClubMember? = null,
     val members: List<ClubMember> = arrayListOf()
@@ -42,7 +43,8 @@ data class ClubMemberDetail(
 
 data class ClubFilterEntity(
     var clubId: Int,
-    var name: String
+    var name: String,
+    var isChecked: Boolean = false
 )
 
 @Parcelize

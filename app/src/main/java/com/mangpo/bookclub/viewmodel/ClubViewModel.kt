@@ -2,14 +2,23 @@ package com.mangpo.bookclub.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.mangpo.bookclub.ApplicationClass.Companion.database
+import com.mangpo.bookclub.dao.BookDao
+import com.mangpo.bookclub.model.entities.BookEntity
 import com.mangpo.bookclub.model.entities.CreateClubEntity
 import com.mangpo.bookclub.model.entities.InviteMemRequest
 import com.mangpo.bookclub.model.remote.*
+import com.mangpo.bookclub.repository.BookRepositoryImpl
 import com.mangpo.bookclub.repository.ClubRepositoryImpl
 import com.mangpo.bookclub.utils.LogUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ClubViewModel: BaseViewModel() {
-    private val repository: ClubRepositoryImpl = ClubRepositoryImpl()
+    private val clubRepository: ClubRepositoryImpl = ClubRepositoryImpl()
+    private val bookRepository: BookRepositoryImpl = BookRepositoryImpl()
+    private val bookDao: BookDao = database.bookDao()
 
     private val _clubList: MutableLiveData<ArrayList<Club>> = MutableLiveData()
     val clubList: LiveData<ArrayList<Club>> get() = _clubList
@@ -32,10 +41,13 @@ class ClubViewModel: BaseViewModel() {
     private val _inviteList: MutableLiveData<List<Invite>> = MutableLiveData()
     val inviteList: LiveData<List<Invite>> get() = _inviteList
 
+    private val _books: MutableLiveData<ArrayList<BookInClub>> = MutableLiveData()
+    val books: LiveData<ArrayList<BookInClub>> get() = _books
+
     private lateinit var newClub: CreateClubResponse
 
     fun getClubsByUser(userId: Int) {
-        repository.getClubsByUser(
+        clubRepository.getClubsByUser(
             userId=userId,
             onResponse = {
                 LogUtil.d("ClubViewModel", "getClubsByUser Success!\ncode: ${it.code()}\nbody: ${it.body()}")
@@ -48,7 +60,7 @@ class ClubViewModel: BaseViewModel() {
     }
 
     fun createClub(club: CreateClubEntity) {
-        repository.createClub(
+        clubRepository.createClub(
             club = club,
             onResponse = {
                 LogUtil.d("ClubViewModel", "createClub Success!\ncode: ${it.code()}\nbody: ${it.body()}")
@@ -66,7 +78,7 @@ class ClubViewModel: BaseViewModel() {
     }
 
     fun deleteClub(clubId: Int) {
-        repository.deleteClub(
+        clubRepository.deleteClub(
             clubId = clubId,
             onResponse = {
                 LogUtil.d("ClubViewModel", "deleteClub Success!\ncode: ${it.code()}")
@@ -80,7 +92,7 @@ class ClubViewModel: BaseViewModel() {
     }
 
     fun getClubInfoByClubId(clubId: Int) {
-        repository.getClubInfoByClubId(
+        clubRepository.getClubInfoByClubId(
             clubId = clubId,
             onResponse = {
                 LogUtil.d("ClubViewModel", "getClubInfoByClubId Success!\ncode: ${it.code()}\nbody: ${it.body()}")
@@ -93,8 +105,44 @@ class ClubViewModel: BaseViewModel() {
         )
     }
 
+    fun setBookImg(books: ArrayList<BookInClub>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            for (book in books) {
+                val img = bookDao.getImageByIsbn(book.isbn)
+
+                if (img==null) {
+                    launch(Dispatchers.IO) {
+                        bookRepository.searchBooks(
+                            query = book.isbn,
+                            target = "isbn",
+                            size = 1,
+                            onResponse = {
+                                launch {
+                                    LogUtil.d("ClubViewModel", "searchBookThumbnail Success!\ncode: ${it.code()}\nbody: ${it.body()}")
+                                    book.bookImg = it.body()!!.documents[0].thumbnail
+                                    val job = launch(Dispatchers.IO) {
+                                        bookDao.insert(BookEntity(isbn = book.isbn, image = it.body()!!.documents[0].thumbnail))
+                                    }
+                                    job.join()
+                                }
+                            },
+                            onFailure = {
+                                LogUtil.e("ClubViewModel", "searchBookThumbnail Fail!\nmessage: ${it.message}")
+                            }
+                        )
+                    }
+                } else {
+                    book.bookImg = img
+                }
+            }
+
+            LogUtil.d("ClubViewModel", "ClubViewModel")
+            _books.postValue(books)
+        }
+    }
+
     fun getClubUserInfo(clubId: Int, userId: Int) {
-        repository.getClubUserInfo(
+        clubRepository.getClubUserInfo(
             clubId = clubId,
             userId = userId,
             onResponse = {
@@ -109,7 +157,7 @@ class ClubViewModel: BaseViewModel() {
     }
 
     fun inviteMember(member: InviteMemRequest) {
-        repository.inviteMember(
+        clubRepository.inviteMember(
             inviteMem = member,
             onResponse = {
                 LogUtil.d("ClubViewModel", "inviteMember Success!\ncode: ${it.code()}\nbody: ${it.body()}")
@@ -123,7 +171,7 @@ class ClubViewModel: BaseViewModel() {
     }
 
     fun getInviteList() {
-        repository.getInvites(
+        clubRepository.getInvites(
             onResponse = {
                 LogUtil.d("ClubViewModel", "getInviteList Success!\ncode: ${it.code()}\nbody: ${it.body()}")
                 _inviteList.postValue(it.body()!!.data)

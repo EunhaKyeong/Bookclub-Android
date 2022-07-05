@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.mangpo.bookclub.model.entities.RecordRequest
 import com.mangpo.bookclub.model.entities.RecordUpdateRequest
-import com.mangpo.bookclub.model.remote.RecordResponse
+import com.mangpo.bookclub.model.remote.PostDetail
 import com.mangpo.bookclub.repository.PostRepositoryImpl
 import com.mangpo.bookclub.utils.LogUtil
 
 class PostViewModel: BaseViewModel() {
     private val postRepository: PostRepositoryImpl = PostRepositoryImpl()
 
-    private val _newRecord: MutableLiveData<RecordResponse> = MutableLiveData()
-    val newRecord: LiveData<RecordResponse> get() = _newRecord
+    private val _newRecord: MutableLiveData<PostDetail> = MutableLiveData()
+    val newRecord: LiveData<PostDetail> get() = _newRecord
 
     private val _uploadImgPaths: MutableLiveData<List<String>> = MutableLiveData()
     val uploadImgPaths: LiveData<List<String>> get() = _uploadImgPaths
@@ -23,8 +23,8 @@ class PostViewModel: BaseViewModel() {
     private val _deletePhotosCode: MutableLiveData<Int> = MutableLiveData()
     val deletePhotosCode: LiveData<Int> get() = _deletePhotosCode
 
-    private val _updateRecord: MutableLiveData<RecordResponse> = MutableLiveData()
-    val updateRecord: LiveData<RecordResponse> get() = _updateRecord
+    private val _updateRecord: MutableLiveData<PostDetail> = MutableLiveData()
+    val updateRecord: LiveData<PostDetail> get() = _updateRecord
 
     fun createRecord(record: RecordRequest) {
         postRepository.createPost(

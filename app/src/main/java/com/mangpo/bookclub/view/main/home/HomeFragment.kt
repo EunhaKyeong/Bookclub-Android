@@ -87,8 +87,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         binding.homeMemoBtn.setOnClickListener {
-            PrefsUtils.setTempRecord("")
-            val action = HomeFragmentDirections.actionHomeFragmentToRecordFragment("CREATE", null, null)
+            val action = HomeFragmentDirections.actionHomeFragmentToRecordFragment(null)
             findNavController().navigate(action)
         }
 

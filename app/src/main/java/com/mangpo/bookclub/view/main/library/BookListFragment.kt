@@ -15,7 +15,7 @@ import com.mangpo.bookclub.R
 import com.mangpo.bookclub.config.GlobalVariable
 import com.mangpo.bookclub.databinding.FragmentBookListBinding
 import com.mangpo.bookclub.model.entities.ClubFilterEntity
-import com.mangpo.bookclub.model.remote.Book
+import com.mangpo.bookclub.model.remote.BookInLib
 import com.mangpo.bookclub.model.remote.Club
 import com.mangpo.bookclub.utils.LogUtil
 import com.mangpo.bookclub.utils.convertDpToPx
@@ -52,11 +52,7 @@ class BookListFragment(private val category: String) : BaseFragment<FragmentBook
     }
 
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        if (p0!=null && p0.isNotEmpty()) {
-            val books = ((bookVm.books.value) as ArrayList<Book>).filter { it.name.contains(p0) }
-            bookRVAdapter.setData(books)
-        } else
-            setInitBook()
+        bookRVAdapter.filter.filter(p0)
     }
 
     override fun afterTextChanged(p0: Editable?) {
@@ -65,8 +61,8 @@ class BookListFragment(private val category: String) : BaseFragment<FragmentBook
     private fun initAdapter() {
         bookRVAdapter = BookRVAdapter()
         bookRVAdapter.setMyClickListener(object : BookRVAdapter.MyClickListener {
-            override fun sendBook(book: Book) {
-                val action = LibraryFragmentDirections.actionLibraryFragmentToBookDetailFragment(Gson().toJson(book))
+            override fun sendBook(bookInLib: BookInLib) {
+                val action = LibraryFragmentDirections.actionLibraryFragmentToBookDetailFragment(Gson().toJson(bookInLib))
                 findNavController().navigate(action)
             }
         })
@@ -75,8 +71,6 @@ class BookListFragment(private val category: String) : BaseFragment<FragmentBook
         clubFilterRVAdapter = ClubFilterRVAdapter()
         clubFilterRVAdapter.setMyEventListener(object: ClubFilterRVAdapter.MyEventListener {
             override fun check(clubIdList: ArrayList<Int>) {
-                LogUtil.d("BookListFragment", "clubIdList: $clubIdList")
-
                 if (clubIdList.isEmpty())
                     bookVm.getBooksByCategory(category)
             }
@@ -183,7 +177,7 @@ class BookListFragment(private val category: String) : BaseFragment<FragmentBook
     }
 
     private fun setBookBySort() {
-        val books = bookVm.books.value as ArrayList<Book>
+        val books = bookVm.books.value as ArrayList<BookInLib>
 
         when {
             binding.bookListNewestCb.isChecked -> bookRVAdapter.setData(books.sortedWith(compareBy { it.modifiedDate }).reversed())
@@ -193,8 +187,8 @@ class BookListFragment(private val category: String) : BaseFragment<FragmentBook
         }
     }
 
-    private fun setLibraryView(books: ArrayList<Book>) {
-        if (books.size==0) {
+    private fun setLibraryView(bookInLibs: ArrayList<BookInLib>) {
+        if (bookInLibs.size==0) {
             binding.bookListRv.visibility = View.INVISIBLE
             binding.bookListEmptyIv.visibility = View.VISIBLE
             binding.bookListSadCharacterIv.visibility = View.VISIBLE
@@ -203,7 +197,7 @@ class BookListFragment(private val category: String) : BaseFragment<FragmentBook
             binding.bookListRv.visibility = View.VISIBLE
             binding.bookListEmptyIv.visibility = View.INVISIBLE
             binding.bookListSadCharacterIv.visibility = View.INVISIBLE
-            bookRVAdapter.setData(books)
+            bookRVAdapter.setData(bookInLibs)
         }
     }
 

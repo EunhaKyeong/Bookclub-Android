@@ -6,16 +6,15 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.gson.Gson
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import com.mangpo.bookclub.R
 import com.mangpo.bookclub.databinding.FragmentRecordBinding
+import com.mangpo.bookclub.model.domain.Record
 import com.mangpo.bookclub.model.entities.RecordRequest
-import com.mangpo.bookclub.model.remote.Book
-import com.mangpo.bookclub.model.remote.RecordResponse
+import com.mangpo.bookclub.model.remote.BookInLib
+import com.mangpo.bookclub.model.remote.PostDetail
 import com.mangpo.bookclub.utils.LogUtil
-import com.mangpo.bookclub.utils.PrefsUtils
 import com.mangpo.bookclub.view.BaseFragment
 import com.mangpo.bookclub.view.adpater.RecordPhotoRVAdapter
 import gun0912.tedimagepicker.builder.TedImagePicker
@@ -36,49 +35,27 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(FragmentRecordBinding
     private var backPressedFlag: Boolean = false
 
     private lateinit var myBackPressedCallback: OnBackPressedCallback
-    private lateinit var book: Book
+    private lateinit var bookInLib: BookInLib
     private lateinit var recordVerCreate: RecordRequest
-    private lateinit var recordVerUpdate: RecordResponse
+    private lateinit var recordVerUpdate: PostDetail
 
     override fun initAfterBinding() {
         myBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 backPressedFlag = true
-                PrefsUtils.setTempRecord("")
             }
         }
 
         setMyEventListener()
         initAdapter()
 
-        if (args.mode=="CREATE" && PrefsUtils.getTempRecord().isNotBlank()) {
-            LogUtil.d("RecordFragment", "args.mode==\"CREATE\" && PrefsUtils.getTempRecord().isNotBlank()")
-            recordVerCreate = Gson().fromJson(PrefsUtils.getTempRecord(), RecordRequest::class.java)
-            bindRecordVerCreate(recordVerCreate)
-        } else if (args.mode=="UPDATE" && PrefsUtils.getTempRecord().isBlank()) {
-            LogUtil.d("RecordFragment", "args.mode==\"UPDATE\"")
-            recordVerUpdate = Gson().fromJson(args.record, RecordResponse::class.java)
-            bindRecordVerUpdate(recordVerUpdate)
-        } else if (args.mode=="UPDATE" && PrefsUtils.getTempRecord().isNotBlank()) {
-            LogUtil.d("RecordFragment", "args.mode==\"UPDATE\" && PrefsUtils.getTempRecord().isNotBlank()")
-            recordVerUpdate = Gson().fromJson(PrefsUtils.getTempRecord(), RecordResponse::class.java)
-            bindRecordVerUpdate(recordVerUpdate)
+        if (args.record==null) {
+
+        } else if (args.record!!.postId!=null) {    //메모 수정
+
+        } else {    //아직 등록되지 않은 책에 대한 메모 작성 or 등록된 책에 대한 메모 작성
+            binding.recordSelectBookBtn.text = args.record!!.bookTitle
         }
-
-        if (args.book!=null) {
-            book = Gson().fromJson(args.book, Book::class.java)
-            bindBook()
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        LogUtil.d("RecordFragment", "onStop")
-
-        if (!backPressedFlag && args.mode=="CREATE")
-            PrefsUtils.setTempRecord(Gson().toJson(setRecordVerCreate()))
-        else if (!backPressedFlag && args.mode=="UPDATE")
-            PrefsUtils.setTempRecord(Gson().toJson(setRecordVerUpdate()))
     }
 
     override fun onDestroyView() {
@@ -90,7 +67,6 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(FragmentRecordBinding
 
     private fun setMyEventListener() {
         binding.recordSelectBookBtn.setOnClickListener {
-            PrefsUtils.setTempRecord(Gson().toJson(setRecordVerCreate()))
             findNavController().navigate(R.id.action_recordFragment_to_selectBookFragment)
         }
 
@@ -119,40 +95,6 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(FragmentRecordBinding
 
         })
         binding.recordPhotoRv.adapter = recordPhotoRVAdapter
-    }
-
-    private fun bindRecordVerCreate(record: RecordRequest) {
-        binding.recordSelectBookBtn.isEnabled = true
-
-        binding.recordTitleEt.setText(record.title)
-        binding.recordContentEt.setText(record.content)
-
-        photos = record.postImgLocations as ArrayList<String>
-        binding.recordPhotoCntTv.text = photos.size.toString()
-        if (record.postImgLocations.isNotEmpty()) {
-            binding.recordPhotoRv.visibility = View.VISIBLE
-            recordPhotoRVAdapter.setData(record.postImgLocations as ArrayList<String>)
-            binding.recordDescTv.visibility = View.INVISIBLE
-        }
-    }
-
-    private fun bindRecordVerUpdate(record: RecordResponse) {
-        binding.recordSelectBookBtn.isEnabled = false
-
-        binding.recordTitleEt.setText(record.title)
-        binding.recordContentEt.setText(record.content)
-
-        photos = record.postImgLocations as ArrayList<String>
-        binding.recordPhotoCntTv.text = photos.size.toString()
-        if (record.postImgLocations.isNotEmpty()) {
-            binding.recordPhotoRv.visibility = View.VISIBLE
-            recordPhotoRVAdapter.setData(record.postImgLocations as ArrayList<String>)
-            binding.recordDescTv.visibility = View.INVISIBLE
-        }
-    }
-
-    private fun bindBook() {
-        binding.recordSelectBookBtn.text = book.name
     }
 
     private fun checkPermission() {
@@ -195,50 +137,6 @@ class RecordFragment : BaseFragment<FragmentRecordBinding>(FragmentRecordBinding
             }
     }
 
-    private fun setRecordVerCreate(): RecordRequest {
-        if (!::recordVerCreate.isInitialized)
-            recordVerCreate = RecordRequest()
-
-        recordVerCreate.title = binding.recordTitleEt.text.toString()
-        recordVerCreate.content = binding.recordContentEt.text.toString()
-        recordVerCreate.postImgLocations = photos
-
-        return recordVerCreate
-    }
-
-    private fun setRecordVerUpdate(): RecordResponse {
-        recordVerUpdate.title = binding.recordTitleEt.text.toString()
-        recordVerUpdate.content = binding.recordContentEt.text.toString()
-        recordVerUpdate.postImgLocations = photos
-
-        return recordVerUpdate
-    }
-
     private fun validate() {
-        if (binding.recordSelectBookBtn.text==getString(R.string.msg_select_book)) {
-            val action = RecordFragmentDirections.actionRecordFragmentToMsgDescDialogFragment(getString(R.string.title_alarm), getString(R.string.error_select_book))
-            findNavController().navigate(action)
-        } else if (binding.recordTitleEt.text.isBlank()) {
-            val action = RecordFragmentDirections.actionRecordFragmentToMsgDescDialogFragment(getString(R.string.title_alarm), getString(R.string.error_input_title))
-            findNavController().navigate(action)
-        } else if (binding.recordContentEt.text.isBlank()) {
-            val action = RecordFragmentDirections.actionRecordFragmentToMsgDescDialogFragment(getString(R.string.title_alarm), getString(R.string.error_input_content))
-            findNavController().navigate(action)
-        } else if (args.mode=="CREATE") {
-            PrefsUtils.setTempRecord("")
-            val action = RecordFragmentDirections.actionRecordFragmentToRecordSettingFragment("CREATE", Gson().toJson(setRecordVerCreate()), Gson().toJson(book), null)
-            findNavController().navigate(action)
-        } else {
-            PrefsUtils.setTempRecord("")
-            val prevPhotos = recordVerUpdate.postImgLocations
-
-            if (prevPhotos.isEmpty()) {
-                val action = RecordFragmentDirections.actionRecordFragmentToRecordSettingFragment("UPDATE", Gson().toJson(setRecordVerUpdate()), Gson().toJson(book), null)
-                findNavController().navigate(action)
-            } else {
-                val action = RecordFragmentDirections.actionRecordFragmentToRecordSettingFragment("UPDATE", Gson().toJson(setRecordVerUpdate()), Gson().toJson(book), prevPhotos.toTypedArray())
-                findNavController().navigate(action)
-            }
-        }
     }
 }

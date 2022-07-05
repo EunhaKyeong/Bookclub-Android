@@ -11,13 +11,11 @@ import com.google.gson.Gson
 import com.mangpo.bookclub.R
 import com.mangpo.bookclub.config.GlobalVariable
 import com.mangpo.bookclub.databinding.FragmentRecordSettingBinding
-import com.mangpo.bookclub.model.entities.ClubFilterEntity
-import com.mangpo.bookclub.model.entities.Link
-import com.mangpo.bookclub.model.entities.RecordRequest
-import com.mangpo.bookclub.model.entities.RecordUpdateRequest
-import com.mangpo.bookclub.model.remote.Book
+import com.mangpo.bookclub.model.domain.RecordDetail
+import com.mangpo.bookclub.model.entities.*
+import com.mangpo.bookclub.model.remote.BookInLib
 import com.mangpo.bookclub.model.remote.Club
-import com.mangpo.bookclub.model.remote.RecordResponse
+import com.mangpo.bookclub.model.remote.PostDetail
 import com.mangpo.bookclub.utils.ImgUtils.getAbsolutePathByBitmap
 import com.mangpo.bookclub.utils.ImgUtils.uriToBitmap
 import com.mangpo.bookclub.utils.LogUtil
@@ -38,9 +36,9 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
 
     private var clickedLinkPosition: Int? = null
 
-    private lateinit var book: Book
+    private lateinit var bookInLib: BookInLib
     private lateinit var recordVerCreate: RecordRequest
-    private lateinit var recordVerUpdate: RecordResponse
+    private lateinit var recordVerUpdate: PostDetail
     private lateinit var linkRVAdapter: LinkRVAdapter
     private lateinit var actionDialog: ActionDialogFragment
     private lateinit var clubCbRVAdapter: ClubCBRVAdapter
@@ -58,11 +56,10 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
         else if (args.mode=="UPDATE" && ::recordVerUpdate.isInitialized)
             bindRecordVerUpdate()
         else {
-            recordVerUpdate = Gson().fromJson(args.record, RecordResponse::class.java)
-            LogUtil.d("RecordSettingFragment", "recordVerUpdate: $recordVerUpdate")
+            recordVerUpdate = Gson().fromJson(args.record, PostDetail::class.java)
             bindRecordVerUpdate()
         }
-        book = Gson().fromJson(args.book, Book::class.java)
+        bookInLib = Gson().fromJson(args.book, BookInLib::class.java)
 
         setMyEventListener()
         observe()
@@ -130,14 +127,12 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
                 showNetworkSnackBar()
                 dismissLoadingDialog()
             } else if (args.mode=="CREATE") {   //3. 기록 추가일 때
-                LogUtil.d("RecordSettingFragment", "record: $recordVerCreate")
                 when {
-                    book.id==null -> bookVm.createBook(book) //3-1. book.id 가 null -> 책 등록
+                    bookInLib.id==null -> bookVm.createBook(bookInLib) //3-1. book.id 가 null -> 책 등록
                     recordVerCreate.postImgLocations.isEmpty() -> postVm.createRecord(setRecordVerCreate()) //3-2. 이미지 없는 기록 -> createRecord
                     else -> uploadPhotos()    //3-3. 이미지 있는 기록 -> uploadPost
                 }
             } else {    //4. 기록 수정일 때
-                LogUtil.d("RecordSettingFragment", "record: $recordVerUpdate")
                 if (recordVerUpdate.postImgLocations.isEmpty()) //4-1. 이미지가 없을 때
                     postVm.updatePost(recordVerUpdate.postId, setRecordUpdateRequest())
                 else    //4-2. 이미지가 있을 때
@@ -147,7 +142,6 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
 
         binding.recordSettingLinkPlusView.setOnClickListener {
             hideKeyboard()
-            LogUtil.d("RecordSettingFragment", "recordSettingLinkPlusView onClick itemCount: ${linkRVAdapter.itemCount}")
 
             if (linkRVAdapter.itemCount==2) {
                 it.visibility = View.GONE
@@ -168,12 +162,14 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
         binding.recordSettingLocationEt.setText(recordVerCreate.location)
         binding.recordSettingTimeEt.setText(recordVerCreate.readTime)
         setLinkUI(recordVerCreate.linkRequestDtos as ArrayList<Link>)
+        clubCbRVAdapter.setCheckedUI(recordVerCreate.clubIdListForScope)
     }
 
     private fun bindRecordVerUpdate() {
         binding.recordSettingLocationEt.setText(recordVerUpdate.location)
         binding.recordSettingTimeEt.setText(recordVerUpdate.readTime)
         setLinkUI(recordVerUpdate.linkResponseDtos as ArrayList<Link>)
+        clubCbRVAdapter.setCheckedUI(recordVerUpdate.clubIdListForScope)
     }
 
     private fun setLinkUI(links: ArrayList<Link>) {
@@ -200,9 +196,9 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
 
         if (links.isEmpty()) {
             if (args.mode=="CREATE")
-                recordVerCreate.linkRequestDtos = listOf()
+                recordVerCreate.linkRequestDtos = arrayListOf()
             else
-                recordVerUpdate.linkResponseDtos = listOf()
+                recordVerUpdate.linkResponseDtos = arrayListOf()
 
             return true
         } else {
@@ -214,7 +210,7 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
             if (args.mode=="CREATE")
                 recordVerCreate.linkRequestDtos = links
             else
-                recordVerUpdate.linkResponseDtos = links
+                recordVerUpdate.linkResponseDtos = ArrayList(links)
         }
 
         return true
@@ -242,44 +238,90 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
     }
 
     private fun setRecordVerCreate(): RecordRequest {
-        recordVerCreate.bookId = book.id
-        recordVerCreate.scope = "PRIVATE"
+        recordVerCreate.bookId = bookInLib.id
+
+        val clickedClubs = clubCbRVAdapter.getClickedClubs()
+        if (clickedClubs.isEmpty())
+            recordVerCreate.scope = "PRIVATE"
+        else {
+            recordVerCreate.scope = "CLUB"
+            recordVerCreate.clubIdListForScope = clickedClubs
+        }
         recordVerCreate.location = binding.recordSettingLocationEt.text.toString()
         recordVerCreate.readTime = binding.recordSettingTimeEt.text.toString()
-        recordVerCreate.clubIdListForScope = clubCbRVAdapter.getClickedClubs()
         recordVerCreate.linkRequestDtos = linkRVAdapter.getLinks()
 
         return recordVerCreate
     }
 
-    private fun setRecordVerUpdate(): RecordResponse {
+    private fun setRecordVerUpdate(): PostDetail {
         recordVerUpdate.location = binding.recordSettingLocationEt.text.toString()
         recordVerUpdate.readTime = binding.recordSettingTimeEt.text.toString()
-        recordVerUpdate.linkResponseDtos = linkRVAdapter.getLinks()
+        recordVerUpdate.linkResponseDtos = ArrayList(linkRVAdapter.getLinks())
+
+        val clickedClubs = clubCbRVAdapter.getClickedClubs()
+        if (clickedClubs.isEmpty())
+            recordVerUpdate.scope = "PRIVATE"
+        else {
+            recordVerUpdate.scope = "CLUB"
+            recordVerUpdate.clubIdListForScope = clickedClubs
+        }
 
         return recordVerUpdate
     }
 
-    private fun setRecordUpdateRequest(): RecordUpdateRequest = RecordUpdateRequest(
-        scope = recordVerUpdate.scope,
-        isIncomplete = recordVerUpdate.isIncomplete,
-        location = binding.recordSettingLocationEt.text.toString(),
-        linkRequestDtos = recordVerUpdate.linkResponseDtos,
-        readTime = binding.recordSettingTimeEt.text.toString(),
-        title = recordVerUpdate.title,
-        content = recordVerUpdate.content,
-        postImgLocations = recordVerUpdate.postImgLocations,
-        clubIdListForScope = clubCbRVAdapter.getClickedClubs()
-    )
+    private fun setRecordUpdateRequest(): RecordUpdateRequest {
+        val recordUpdateReq = RecordUpdateRequest(
+            scope = recordVerUpdate.scope,
+            isIncomplete = recordVerUpdate.isIncomplete,
+            location = binding.recordSettingLocationEt.text.toString(),
+            linkRequestDtos = recordVerUpdate.linkResponseDtos,
+            readTime = binding.recordSettingTimeEt.text.toString(),
+            title = recordVerUpdate.title,
+            content = recordVerUpdate.content,
+            postImgLocations = recordVerUpdate.postImgLocations,
+            clubIdListForScope = clubCbRVAdapter.getClickedClubs()
+        )
+
+        val clickedClubs = clubCbRVAdapter.getClickedClubs()
+        if (clickedClubs.isEmpty())
+            recordUpdateReq.scope = "PRIVATE"
+        else {
+            recordUpdateReq.scope = "CLUB"
+            recordUpdateReq.clubIdListForScope = clickedClubs
+        }
+
+        return recordUpdateReq
+    }
 
     private fun mappingToClubFilterEntity(clubs: ArrayList<Club>): ArrayList<ClubFilterEntity> {
         val clubEntities: ArrayList<ClubFilterEntity> = arrayListOf()
         for (club in clubs) {
-            clubEntities.add(ClubFilterEntity(club.id, club.name))
+            if (args.mode=="CREATE")
+                clubEntities.add(ClubFilterEntity(club.id, club.name, recordVerCreate.clubIdListForScope.contains(club.id)))
+            else
+                clubEntities.add(ClubFilterEntity(club.id, club.name, recordVerUpdate.clubIdListForScope.contains(club.id)))
         }
 
         return clubEntities
     }
+
+    private fun mappingToRecordDetail(record: PostDetail, book: BookInLib): RecordDetail = RecordDetail(
+        recordId = record.postId,
+        date = record.modifiedDate,
+        bookName = book.name,
+        writer = null,
+        scope = record.scope,
+        title = record.title,
+        content = record.content,
+        photos = record.postImgLocations,
+        location = record.location,
+        readTime = record.readTime,
+        hyperlinks = record.linkResponseDtos,
+        likes = record.likedList,
+        comments = record.commentsDto,
+        clubList = record.clubIdListForScope
+    )
 
     private fun observe() {
         bookVm.createBookCode.observe(viewLifecycleOwner, Observer {
@@ -291,7 +333,7 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
 
                 when (code) {
                     201 -> {
-                        book = bookVm.newBook!!
+                        bookInLib = bookVm.newBookInLib!!
 
                         if (recordVerCreate.postImgLocations.isEmpty())
                             postVm.createRecord(setRecordVerCreate())
@@ -311,7 +353,7 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
                 showSnackBar(getString(R.string.error_api))
             else {
                 showToast(getString(R.string.msg_create_record_success))
-                val action = RecordSettingFragmentDirections.actionRecordSettingFragmentToRecordDetailFragment(Gson().toJson(it), Gson().toJson(book))
+                val action = RecordSettingFragmentDirections.actionRecordSettingFragmentToRecordDetailFragment(mappingToRecordDetail(it, bookInLib))
                 findNavController().safeNavigate(action)
             }
         })
@@ -338,7 +380,7 @@ class RecordSettingFragment : BaseFragment<FragmentRecordSettingBinding>(Fragmen
                         postVm.deleteMultiplePhotos(deletePhotos)
                 }
 
-                val action = RecordSettingFragmentDirections.actionRecordSettingFragmentToRecordDetailFragment(Gson().toJson(it), Gson().toJson(book))
+                val action = RecordSettingFragmentDirections.actionRecordSettingFragmentToRecordDetailFragment(mappingToRecordDetail(it, bookInLib))
                 findNavController().safeNavigate(action)
             }
         })

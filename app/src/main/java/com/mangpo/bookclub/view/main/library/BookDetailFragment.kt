@@ -10,8 +10,10 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.mangpo.bookclub.R
 import com.mangpo.bookclub.databinding.FragmentBookDetailBinding
-import com.mangpo.bookclub.model.remote.Book
-import com.mangpo.bookclub.model.remote.RecordResponse
+import com.mangpo.bookclub.model.domain.Record
+import com.mangpo.bookclub.model.domain.RecordDetail
+import com.mangpo.bookclub.model.remote.BookInLib
+import com.mangpo.bookclub.model.remote.PostDetail
 import com.mangpo.bookclub.utils.LogUtil
 import com.mangpo.bookclub.utils.PrefsUtils
 import com.mangpo.bookclub.utils.isNetworkAvailable
@@ -26,7 +28,7 @@ class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(FragmentBookD
 
     private lateinit var actionDialogFragment: ActionDialogFragment
     private lateinit var memoRVAdapter: MemoRVAdapter
-    private lateinit var book: Book
+    private lateinit var bookInLib: BookInLib
 
     override fun initAfterBinding() {
         setMyEventListener()
@@ -34,16 +36,16 @@ class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(FragmentBookD
         initActionDialogFragment()
         observe()
 
-        book = Gson().fromJson(args.book, Book::class.java)
-        bookVm.getPostsByBookId(book.id!!)
+        bookInLib = Gson().fromJson(args.book, BookInLib::class.java)
+        bookVm.getPostsByBookId(bookInLib.id!!)
         bindBook()
     }
 
     private fun bindBook() {
         binding.bookDetailBookIv.clipToOutline = true
-        Glide.with(requireContext()).load(book.image).into(binding.bookDetailBookIv)
-        binding.bookDetailBookNameTv.text = book.name
-        setBookCategoryUI(book.category)
+        Glide.with(requireContext()).load(bookInLib.image).into(binding.bookDetailBookIv)
+        binding.bookDetailBookNameTv.text = bookInLib.name
+        setBookCategoryUI(bookInLib.category)
     }
 
     private fun setBookCategoryUI(category: String) {
@@ -80,19 +82,19 @@ class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(FragmentBookD
         binding.bookDetailReadingView.setOnClickListener {
             if (!isNetworkAvailable(requireContext()))
                 showNetworkSnackBar()
-            else if (book.category=="NOW")
-                bookVm.updateBook(book.id!!, "BEFORE")
+            else if (bookInLib.category=="NOW")
+                bookVm.updateBook(bookInLib.id!!, "BEFORE")
             else
-                bookVm.updateBook(book.id!!, "NOW")
+                bookVm.updateBook(bookInLib.id!!, "NOW")
         }
 
         binding.bookDetailReadAfterView.setOnClickListener {
             if (!isNetworkAvailable(requireContext()))
                 showNetworkSnackBar()
-            else if (book.category=="AFTER")
-                bookVm.updateBook(book.id!!, "BEFORE")
+            else if (bookInLib.category=="AFTER")
+                bookVm.updateBook(bookInLib.id!!, "BEFORE")
             else
-                bookVm.updateBook(book.id!!, "AFTER")
+                bookVm.updateBook(bookInLib.id!!, "AFTER")
         }
 
         binding.bookDetailDeleteView.setOnClickListener {
@@ -101,7 +103,7 @@ class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(FragmentBookD
 
         binding.bookDetailRecordView.setOnClickListener {
             PrefsUtils.setTempRecord("")
-            val action = BookDetailFragmentDirections.actionBookDetailFragmentToRecordFragment("CREATE", null, Gson().toJson(book))
+            val action = BookDetailFragmentDirections.actionBookDetailFragmentToRecordFragment(Record(bookId = bookInLib.id, bookTitle = bookInLib.name))
             findNavController().navigate(action)
         }
     }
@@ -109,13 +111,30 @@ class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(FragmentBookD
     private fun initAdapter() {
         memoRVAdapter = MemoRVAdapter()
         memoRVAdapter.setMyClickListener(object : MemoRVAdapter.MyClickListener {
-            override fun sendRecord(record: RecordResponse) {
-                val action = BookDetailFragmentDirections.actionBookDetailFragmentToRecordDetailFragment(Gson().toJson(record), Gson().toJson(book))
+            override fun sendRecord(record: PostDetail) {
+                val action = BookDetailFragmentDirections.actionBookDetailFragmentToRecordDetailFragment(mappingToRecord(record, bookInLib))
                 findNavController().navigate(action)
             }
         })
         binding.bookDetailRv.adapter = memoRVAdapter
     }
+
+    private fun mappingToRecord(post: PostDetail, book: BookInLib): RecordDetail = RecordDetail(
+        recordId = post.postId,
+        date = post.modifiedDate,
+        bookName = book.name,
+        writer = null,
+        scope = post.scope,
+        title = post.title,
+        content = post.content,
+        photos = post.postImgLocations,
+        location = post.location,
+        readTime = post.readTime,
+        hyperlinks = post.linkResponseDtos,
+        likes = post.likedList,
+        comments = post.commentsDto,
+        clubList = post.clubIdListForScope
+    )
 
     private fun initActionDialogFragment() {
         actionDialogFragment = ActionDialogFragment()
@@ -130,7 +149,7 @@ class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(FragmentBookD
         actionDialogFragment.setMyDialogCallback(object : ActionDialogFragment.MyDialogCallback {
             override fun action1() {
                 showLoadingDialog()
-                bookVm.deleteBook(book.id!!)
+                bookVm.deleteBook(bookInLib.id!!)
             }
 
             override fun action2() {
@@ -152,17 +171,17 @@ class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(FragmentBookD
             if (code!=null) {
                 when (code) {
                     2040 -> {
-                        book.category = "NOW"
+                        bookInLib.category = "NOW"
                         setBookCategoryUI("NOW")
                         getBooks()
                     }
                     2041 -> {
-                        book.category = "AFTER"
+                        bookInLib.category = "AFTER"
                         setBookCategoryUI("AFTER")
                         getBooks()
                     }
                     2042 -> {
-                        book.category = "BEFORE"
+                        bookInLib.category = "BEFORE"
                         setBookCategoryUI("BEFORE")
                         getBooks()
                     }

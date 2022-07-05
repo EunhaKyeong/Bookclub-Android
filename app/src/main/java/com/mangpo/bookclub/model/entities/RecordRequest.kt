@@ -10,7 +10,7 @@ data class RecordRequest(
     var title: String? = null,
     var content: String? = null,
     var postImgLocations: List<String> = listOf(),
-    var clubIdListForScope: List<Int> = listOf()
+    var clubIdListForScope: ArrayList<Int> = arrayListOf()
 )
 
 data class RecordUpdateRequest(

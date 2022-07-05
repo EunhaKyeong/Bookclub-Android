@@ -6,16 +6,16 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.mangpo.bookclub.databinding.ItemMemoBinding
-import com.mangpo.bookclub.model.remote.RecordResponse
+import com.mangpo.bookclub.model.remote.PostDetail
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class MemoRVAdapter(): RecyclerView.Adapter<MemoRVAdapter.MemoViewHolder>() {
     interface MyClickListener {
-        fun sendRecord(record: RecordResponse)
+        fun sendRecord(record: PostDetail)
     }
 
-    private var records: List<RecordResponse> = listOf()
+    private var records: List<PostDetail> = listOf()
 
     private lateinit var binding: ItemMemoBinding
     private lateinit var myClickListener: MyClickListener
@@ -45,7 +45,7 @@ class MemoRVAdapter(): RecyclerView.Adapter<MemoRVAdapter.MemoViewHolder>() {
 
     override fun getItemCount(): Int = records.size
 
-    fun setDate(records: List<RecordResponse>) {
+    fun setDate(records: List<PostDetail>) {
         this.records = records
         notifyDataSetChanged()
     }

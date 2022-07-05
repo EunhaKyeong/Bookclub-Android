@@ -9,9 +9,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.mangpo.bookclub.R
 import com.mangpo.bookclub.databinding.FragmentSelectBookBinding
-import com.mangpo.bookclub.model.remote.Book
+import com.mangpo.bookclub.model.domain.Record
+import com.mangpo.bookclub.model.remote.BookInLib
 import com.mangpo.bookclub.utils.LogUtil
-import com.mangpo.bookclub.utils.PrefsUtils
 import com.mangpo.bookclub.utils.isNetworkAvailable
 import com.mangpo.bookclub.view.BaseFragment
 import com.mangpo.bookclub.view.adpater.BookRVAdapter
@@ -23,7 +23,7 @@ class SelectBookFragment : BaseFragment<FragmentSelectBookBinding>(FragmentSelec
 
     private lateinit var bookRVAdapter: BookRVAdapter
     private lateinit var bookCategoryBottomSheetFragment: BookCategoryBottomSheetFragment
-    private lateinit var book: Book
+    private lateinit var bookInLib: BookInLib
 
     override fun initAfterBinding() {
         setMyEventListener()
@@ -65,10 +65,10 @@ class SelectBookFragment : BaseFragment<FragmentSelectBookBinding>(FragmentSelec
     private fun initAdapter() {
         bookRVAdapter = BookRVAdapter()
         bookRVAdapter.setMyClickListener(object : BookRVAdapter.MyClickListener {
-            override fun sendBook(book: Book) {
-                this@SelectBookFragment.book = book
+            override fun sendBook(bookInLib: BookInLib) {
+                this@SelectBookFragment.bookInLib = bookInLib
 
-                if (book.id==null)
+                if (bookInLib.id==null)
                     bookCategoryBottomSheetFragment.show(requireActivity().supportFragmentManager, null)
                 else
                     goRecord()
@@ -111,13 +111,13 @@ class SelectBookFragment : BaseFragment<FragmentSelectBookBinding>(FragmentSelec
         bookCategoryBottomSheetFragment = BookCategoryBottomSheetFragment()
         bookCategoryBottomSheetFragment.setMyDialogCallback(object : BookCategoryBottomSheetFragment.MyDialogCallback {
             override fun getCategory(category: String) {
-                book.category = category
+                bookInLib.category = category
 
                 if (category=="BEFORE") {
                     if (!isNetworkAvailable(requireContext()))
                         showNetworkSnackBar()
                     else
-                        bookVm.createBook(book)
+                        bookVm.createBook(bookInLib)
                 } else
                     goRecord()
             }
@@ -125,9 +125,11 @@ class SelectBookFragment : BaseFragment<FragmentSelectBookBinding>(FragmentSelec
     }
 
     private fun goRecord() {
-        val action = SelectBookFragmentDirections.actionSelectBookFragmentToRecordFragment("CREATE", PrefsUtils.getTempRecord(), Gson().toJson(book))
+        val action = SelectBookFragmentDirections.actionSelectBookFragmentToRecordFragment(mapperToRecord())
         findNavController().navigate(action)
     }
+
+    private fun mapperToRecord(): Record = Record(bookId = bookInLib.id, bookTitle = bookInLib.name)
 
     private fun observe() {
         bookVm.kakaoBooks.observe(viewLifecycleOwner, Observer {
@@ -150,8 +152,8 @@ class SelectBookFragment : BaseFragment<FragmentSelectBookBinding>(FragmentSelec
                 when (code) {
                     201 -> {
                         showToast(getString(R.string.msg_add_book_success))
-                        book.id = bookVm.newBook!!.id
-                        val action = SelectBookFragmentDirections.actionSelectBookFragmentToBookDetailFragment(Gson().toJson(book))
+                        bookInLib.id = bookVm.newBookInLib!!.id
+                        val action = SelectBookFragmentDirections.actionSelectBookFragmentToBookDetailFragment(Gson().toJson(bookInLib))
                         findNavController().navigate(action)
                     }
                     else -> showSnackBar(getString(R.string.error_api))

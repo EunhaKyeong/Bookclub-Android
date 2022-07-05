@@ -17,15 +17,8 @@
             android:id="@+id/action_recordFragment_to_recordSettingFragment"
             app:destination="@id/recordSettingFragment" />
         <argument
-            android:name="mode"
-            app:argType="string" />
-        <argument
             android:name="record"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="book"
-            app:argType="string"
+            app:argType="com.mangpo.bookclub.model.domain.Record"
             app:nullable="true" />
         <action
             android:id="@+id/action_recordFragment_to_msgDescDialogFragment"
@@ -88,18 +81,15 @@
         android:name="com.mangpo.bookclub.view.main.record.RecordDetailFragment"
         android:label="fragment_record_detail"
         tools:layout="@layout/fragment_record_detail">
-        <argument
-            android:name="record"
-            app:argType="string" />
-        <argument
-            android:name="book"
-            app:argType="string" />
         <action
             android:id="@+id/action_recordDetailFragment_to_photoViewActivity"
             app:destination="@id/photoViewActivity" />
         <action
             android:id="@+id/action_recordDetailFragment_to_recordFragment"
             app:destination="@id/recordFragment" />
+        <argument
+            android:name="record"
+            app:argType="com.mangpo.bookclub.model.domain.RecordDetail" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

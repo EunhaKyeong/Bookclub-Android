@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.mangpo.bookclub.ApplicationClass.Companion.database
+import com.mangpo.bookclub.BuildConfig
 import com.mangpo.bookclub.dao.BookDao
 import com.mangpo.bookclub.model.entities.BookCategoryRequest
 import com.mangpo.bookclub.model.entities.BookEntity
 import com.mangpo.bookclub.model.entities.BookRequest
-import com.mangpo.bookclub.model.remote.Book
+import com.mangpo.bookclub.model.remote.BookInLib
 import com.mangpo.bookclub.model.remote.KakaoBook
-import com.mangpo.bookclub.model.remote.RecordResponse
+import com.mangpo.bookclub.model.remote.PostDetail
 import com.mangpo.bookclub.repository.BookRepositoryImpl
 import com.mangpo.bookclub.utils.LogUtil
 import kotlinx.coroutines.*
@@ -19,15 +20,15 @@ class BookViewModel: BaseViewModel() {
     private val bookRepository: BookRepositoryImpl = BookRepositoryImpl()
     private val bookDao: BookDao = database.bookDao()
 
-    private val _kakaoBooks: MutableLiveData<List<Book>> = MutableLiveData()
-    val kakaoBooks: LiveData<List<Book>> get() = _kakaoBooks
+    private val _kakaoBooks: MutableLiveData<List<BookInLib>> = MutableLiveData()
+    val kakaoBooks: LiveData<List<BookInLib>> get() = _kakaoBooks
 
-    private val _books: MutableLiveData<List<Book>> = MutableLiveData()
-    val books: LiveData<List<Book>> get() = _books
+    private val _books: MutableLiveData<List<BookInLib>> = MutableLiveData()
+    val books: LiveData<List<BookInLib>> get() = _books
 
     private val _createBookCode: MutableLiveData<Event<Int>> = MutableLiveData()
     val createBookCode:  LiveData<Event<Int>> get() = _createBookCode
-    var newBook: Book? = null
+    var newBookInLib: BookInLib? = null
 
     private val _updateBookCode: MutableLiveData<Event<Int>> = MutableLiveData()
     val updateBookCode: LiveData<Event<Int>> get() = _updateBookCode
@@ -35,54 +36,54 @@ class BookViewModel: BaseViewModel() {
     private val _deleteBookCode: MutableLiveData<Event<Int>> = MutableLiveData()
     val deleteBookCode: LiveData<Event<Int>> get() = _deleteBookCode
 
-    private val _nowBooks: MutableLiveData<ArrayList<Book>> = MutableLiveData()
-    val nowBooks: LiveData<ArrayList<Book>> get() = _nowBooks
+    private val _nowBooks: MutableLiveData<ArrayList<BookInLib>> = MutableLiveData()
+    val nowBooks: LiveData<ArrayList<BookInLib>> get() = _nowBooks
 
-    private val _afterBooks: MutableLiveData<ArrayList<Book>> = MutableLiveData()
-    val afterBooks: LiveData<ArrayList<Book>> get() = _afterBooks
+    private val _afterBooks: MutableLiveData<ArrayList<BookInLib>> = MutableLiveData()
+    val afterBooks: LiveData<ArrayList<BookInLib>> get() = _afterBooks
 
-    private val _beforeBooks: MutableLiveData<ArrayList<Book>> = MutableLiveData()
-    val beforeBooks: LiveData<ArrayList<Book>> get() = _beforeBooks
+    private val _beforeBooks: MutableLiveData<ArrayList<BookInLib>> = MutableLiveData()
+    val beforeBooks: LiveData<ArrayList<BookInLib>> get() = _beforeBooks
 
-    private val _records: MutableLiveData<List<RecordResponse>> = MutableLiveData()
-    val records: LiveData<List<RecordResponse>> get() = _records
+    private val _records: MutableLiveData<List<PostDetail>> = MutableLiveData()
+    val records: LiveData<List<PostDetail>> get() = _records
 
-    private fun kakaoBookToBook(kakaoBook: KakaoBook): Book = Book(
+    private fun kakaoBookToBook(kakaoBook: KakaoBook): BookInLib = BookInLib(
         name = kakaoBook.title,
         isbn = kakaoBook.isbn,
         image = kakaoBook.thumbnail
     )
 
-    private fun setBookImg(position: Int, books: List<Book>, category: String) {
-        if (position==books.size) {
-            _books.postValue(books)
+    private fun setBookImg(position: Int, bookInLibs: List<BookInLib>, category: String) {
+        if (position==bookInLibs.size) {
+            _books.postValue(bookInLibs)
 
             when (category) {
-                "NOW" -> _nowBooks.postValue((books as ArrayList<Book>))
-                "AFTER" -> _afterBooks.postValue(books as ArrayList<Book>)
-                "BEFORE" -> _beforeBooks.postValue(books as ArrayList<Book>)
+                "NOW" -> _nowBooks.postValue((bookInLibs as ArrayList<BookInLib>))
+                "AFTER" -> _afterBooks.postValue(bookInLibs as ArrayList<BookInLib>)
+                "BEFORE" -> _beforeBooks.postValue(bookInLibs as ArrayList<BookInLib>)
             }
 
             return
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            val img = bookDao.getImageByIsbn(books[position].isbn)
+            val img = bookDao.getImageByIsbn(bookInLibs[position].isbn)
 
             if (img==null || img.isBlank()) {
                 bookRepository.searchBooks(
-                    query = books[position].isbn,
+                    query = bookInLibs[position].isbn,
                     target = "isbn",
                     size = 1,
                     onResponse = {
                         viewModelScope.launch {
                             LogUtil.d("BookViewModel", "searchBookThumbnail Success!\ncode: ${it.code()}\nbody: ${it.body()}")
-                            books[position].image = it.body()!!.documents[0].thumbnail
+                            bookInLibs[position].image = it.body()!!.documents[0].thumbnail
                             val job = launch(Dispatchers.IO) {
-                                bookDao.insert(BookEntity(isbn = books[position].isbn, image = it.body()!!.documents[0].thumbnail))
+                                bookDao.insert(BookEntity(isbn = bookInLibs[position].isbn, image = it.body()!!.documents[0].thumbnail))
                             }
                             job.join()
-                            setBookImg(position + 1, books, category)
+                            setBookImg(position + 1, bookInLibs, category)
                         }
                     },
                     onFailure = {
@@ -90,8 +91,8 @@ class BookViewModel: BaseViewModel() {
                     }
                 )
             } else {
-                books[position].image = img
-                setBookImg(position + 1, books, category)
+                bookInLibs[position].image = img
+                setBookImg(position + 1, bookInLibs, category)
             }
         }
     }
@@ -106,13 +107,13 @@ class BookViewModel: BaseViewModel() {
 
                 if (it.code()==200) {
                     val kakaoBooks = it.body()!!.documents
-                    val books: ArrayList<Book> = arrayListOf()
+                    val bookInLibs: ArrayList<BookInLib> = arrayListOf()
 
                     for (book in kakaoBooks) {
-                        books.add(kakaoBookToBook(book))
+                        bookInLibs.add(kakaoBookToBook(book))
                     }
 
-                    _kakaoBooks.value = books
+                    _kakaoBooks.value = bookInLibs
                 }
             },
             onFailure = {
@@ -136,9 +137,9 @@ class BookViewModel: BaseViewModel() {
         )
     }
 
-    fun createBook(book: Book) {
-        val isbn: String = book.isbn.split(" ")[0]
-        val bookReq: BookRequest = BookRequest(name = book.name, isbn = isbn, category = book.category)
+    fun createBook(bookInLib: BookInLib) {
+        val isbn: String = bookInLib.isbn.split(" ")[0]
+        val bookReq: BookRequest = BookRequest(name = bookInLib.name, isbn = isbn, category = bookInLib.category)
 
         bookRepository.createBook(
             book = bookReq,
@@ -146,9 +147,9 @@ class BookViewModel: BaseViewModel() {
                 LogUtil.d("BookViewModel", "createBook Success!\ncode: ${it.code()}\nbody: ${it.body()}")
 
                 if (it.code()==201) {
-                    newBook = it.body()!!
+                    newBookInLib = it.body()!!
                     viewModelScope.launch (Dispatchers.IO) {
-                        bookDao.insert(BookEntity(isbn = isbn, image = book.image))
+                        bookDao.insert(BookEntity(isbn = isbn, image = bookInLib.image))
                     }
 
                     when (it.body()!!.category) {

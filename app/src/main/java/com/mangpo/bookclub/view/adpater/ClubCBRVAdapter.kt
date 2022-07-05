@@ -24,6 +24,7 @@ class ClubCBRVAdapter(): RecyclerView.Adapter<ClubCBRVAdapter.ClubCBViewHolder>(
 
     override fun onBindViewHolder(holder: ClubCBRVAdapter.ClubCBViewHolder, position: Int) {
         holder.clubCB.text = clubs[position].name
+        holder.clubCB.isChecked = clubs[position].isChecked
         holder.clubCB.setOnCheckedChangeListener { compoundButton, b ->
             if (b)
                 clickedClubs.add(clubs[position].clubId)
@@ -44,4 +45,11 @@ class ClubCBRVAdapter(): RecyclerView.Adapter<ClubCBRVAdapter.ClubCBViewHolder>(
     }
 
     fun getClickedClubs(): ArrayList<Int> = clickedClubs
+
+    fun setCheckedUI(checkedClubId: ArrayList<Int>) {
+        for (club in clubs) {
+            club.isChecked = checkedClubId.contains(club.clubId)
+        }
+        notifyDataSetChanged()
+    }
 }

@@ -48,65 +48,170 @@
         app:layout_constraintEnd_toEndOf="@+id/book_club_library_title_tv"
         app:layout_constraintTop_toTopOf="@+id/book_club_library_title_tv" />
 
-    <CheckBox
-        android:id="@+id/book_club_library_search_cb"
-        android:layout_width="61dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="20dp"
-        android:background="@drawable/selector_book_club_library_filter_btn"
-        android:button="@null"
-        android:paddingStart="15dp"
-        android:text="@string/title_search"
-        android:textAppearance="@style/ta_r_10_kr"
-        android:textColor="@drawable/selector_book_club_library_filter_btn_text"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/book_club_library_cg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/book_club_library_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/book_club_library_title_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/book_club_library_title_tv"
+        app:singleLine="true"
+        app:singleSelection="true">
 
-    <ImageView
-        android:id="@+id/book_club_library_search_iv"
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:layout_marginEnd="15dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_reading_glasses_white"
-        app:layout_constraintBottom_toBottomOf="@+id/book_club_library_search_cb"
-        app:layout_constraintEnd_toEndOf="@+id/book_club_library_search_cb"
-        app:layout_constraintTop_toTopOf="@+id/book_club_library_search_cb" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/book_club_library_search_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="61dp"
+            android:layout_height="26dp"
+            android:layoutDirection="rtl"
+            android:text="@string/title_search"
+            android:textAlignment="center"
+            android:textAppearance="@style/ta_r_10_kr"
+            android:textColor="@drawable/selector_book_club_library_filter_chip_text"
+            app:chipIcon="@drawable/selector_book_club_library_filter_chip_icon"
+            app:chipIconSize="10dp"
+            app:chipIconVisible="true"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/white"
+            app:chipStrokeWidth="1dp"
+            app:chipSurfaceColor="@android:color/transparent"
+            app:iconStartPadding="5dp"
+            app:rippleColor="@android:color/transparent"
+            app:textEndPadding="10dp"
+            app:textStartPadding="5dp" />
 
-    <CheckBox
-        android:id="@+id/book_club_library_member_cb"
-        android:layout_width="51dp"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/book_club_library_mem_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="51dp"
+            android:layout_height="26dp"
+            android:text="@string/title_club_mem"
+            android:textAlignment="center"
+            android:textAppearance="@style/ta_r_10_kr"
+            android:textColor="@drawable/selector_book_club_library_filter_chip_text"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/white"
+            app:chipStrokeWidth="1dp"
+            app:chipSurfaceColor="@android:color/transparent"
+            app:rippleColor="@android:color/transparent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/book_club_library_sort_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="51dp"
+            android:layout_height="26dp"
+            android:text="@string/title_sort"
+            android:textAlignment="center"
+            android:textAppearance="@style/ta_r_10_kr"
+            android:textColor="@drawable/selector_book_club_library_filter_chip_text"
+            app:chipMinTouchTargetSize="0dp"
+            app:chipStrokeColor="@color/white"
+            app:chipStrokeWidth="1dp"
+            app:chipSurfaceColor="@android:color/transparent"
+            app:rippleColor="@android:color/transparent" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <EditText
+        android:id="@+id/book_club_library_search_et"
+        android:layout_width="match_parent"
         android:layout_height="26dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/selector_book_club_library_filter_btn"
-        android:button="@null"
-        android:gravity="center"
-        android:text="@string/title_club_mem"
-        android:textAppearance="@style/ta_r_10_kr"
-        android:textColor="@drawable/selector_book_club_library_filter_btn_text"
-        app:layout_constraintBottom_toBottomOf="@+id/book_club_library_search_cb"
-        app:layout_constraintStart_toEndOf="@+id/book_club_library_search_cb"
-        app:layout_constraintTop_toTopOf="@+id/book_club_library_search_cb" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_null_8_grey_dark_1"
+        android:drawableLeft="@drawable/ic_reading_glasses_primary"
+        android:drawablePadding="10dp"
+        android:hint="@string/msg_input_book_name"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="10dp"
+        android:textAppearance="@style/ta_r_12_kr"
+        android:textColor="@color/primary"
+        android:textColorHint="@color/primary"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/book_club_library_view" />
 
-    <CheckBox
-        android:id="@+id/book_club_library_sort_cb"
-        android:layout_width="51dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/selector_book_club_library_filter_btn"
-        android:button="@null"
-        android:gravity="center"
-        android:text="@string/title_sort"
-        android:textAppearance="@style/ta_r_10_kr"
-        android:textColor="@drawable/selector_book_club_library_filter_btn_text"
-        app:layout_constraintBottom_toBottomOf="@+id/book_club_library_search_cb"
-        app:layout_constraintStart_toEndOf="@+id/book_club_library_member_cb"
-        app:layout_constraintTop_toTopOf="@+id/book_club_library_search_cb" />
+    <HorizontalScrollView
+        android:id="@+id/book_club_library_member_hsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/book_club_library_view">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/book_club_library_member_cg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            app:singleSelection="true" />
+
+    </HorizontalScrollView>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/book_club_library_sort_cg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_club_library_view"
+        app:singleLine="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/book_club_library_newest_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:text="@string/title_newest"
+            android:textAlignment="center"
+            android:textAppearance="@style/ta_r_10_kr"
+            android:textColor="@drawable/selector_member_filter_chip"
+            app:chipCornerRadius="3dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:rippleColor="@android:color/transparent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/book_club_library_oldest_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:text="@string/title_oldest"
+            android:textAlignment="center"
+            android:textAppearance="@style/ta_r_10_kr"
+            android:textColor="@drawable/selector_member_filter_chip"
+            app:chipCornerRadius="3dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:rippleColor="@android:color/transparent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/book_club_library_name_chip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:text="@string/title_by_name"
+            android:textAlignment="center"
+            android:textAppearance="@style/ta_r_10_kr"
+            android:textColor="@drawable/selector_member_filter_chip"
+            app:chipCornerRadius="3dp"
+            app:chipMinTouchTargetSize="0dp"
+            app:rippleColor="@android:color/transparent" />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/book_club_library_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="18dp"
         android:clipToPadding="true"
         android:overScrollMode="never"
         android:scrollbars="none"

@@ -8,7 +8,7 @@ import com.mangpo.bookclub.databinding.FragmentBookClubMainBinding
 import com.mangpo.bookclub.model.entities.ClubEntity
 import com.mangpo.bookclub.model.entities.ClubMember
 import com.mangpo.bookclub.model.remote.Club
-import com.mangpo.bookclub.config.ClubViewType
+import com.mangpo.bookclub.config.ViewType
 import com.mangpo.bookclub.config.GlobalVariable
 import com.mangpo.bookclub.utils.LogUtil
 import com.mangpo.bookclub.view.BaseFragment
@@ -75,14 +75,17 @@ class BookClubMainFragment : BaseFragment<FragmentBookClubMainBinding>(FragmentB
         this.clubs = arrayListOf(ClubEntity(), ClubEntity(), ClubEntity())
 
         clubs.forEachIndexed{ index, club ->
-            this.clubs[index].viewType = ClubViewType.CLUB
+            this.clubs[index].viewType = ViewType.CLUB
             this.clubs[index].clubId = club.id
             this.clubs[index].name = club.name
             this.clubs[index].description = club.description
+            this.clubs[index].lastAddBookDate = club.lastAddBookDate
             this.clubs[index].lastUpdatedDate = club.modifiedDate
             this.clubs[index].level = club.level
             this.clubs[index].president = ClubMember(memberId = club.presidentId)
         }
+
+        this.clubs.sortedWith(nullsLast(compareBy ({ it.lastAddBookDate }, {it.lastUpdatedDate} )))
 
         clubVerBigAdapter.setClubs(this.clubs)
     }

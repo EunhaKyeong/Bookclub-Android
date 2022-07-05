@@ -2,7 +2,7 @@ package com.mangpo.bookclub.repository
 
 import com.mangpo.bookclub.model.entities.BookCategoryRequest
 import com.mangpo.bookclub.model.entities.BookRequest
-import com.mangpo.bookclub.model.remote.Book
+import com.mangpo.bookclub.model.remote.BookInLib
 import com.mangpo.bookclub.model.remote.BookResponse
 import com.mangpo.bookclub.model.remote.KakaoBookResponse
 import com.mangpo.bookclub.model.remote.RecordsResponse
@@ -55,18 +55,18 @@ class BookRepositoryImpl: BookRepository {
 
     override fun createBook(
         book: BookRequest,
-        onResponse: (Response<Book>) -> Unit,
+        onResponse: (Response<BookInLib>) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        bookService.createBook(book).enqueue(object : Callback<Book> {
+        bookService.createBook(book).enqueue(object : Callback<BookInLib> {
             override fun onResponse(
-                call: Call<Book>,
-                response: Response<Book>
+                call: Call<BookInLib>,
+                response: Response<BookInLib>
             ) {
                 onResponse(response)
             }
 
-            override fun onFailure(call: Call<Book>, t: Throwable) {
+            override fun onFailure(call: Call<BookInLib>, t: Throwable) {
                 onFailure(t)
             }
         })
