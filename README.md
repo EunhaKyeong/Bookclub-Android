@@ -11,4 +11,4 @@
 <br><br>
 
 <h1>Documents</h1>
-<a href="https://yunamom.tistory.com](https://nebula-ferry-f85.notion.site/Ourpage-19c899c22c7a80e588bcdb63c5200ca6">👩‍💻 Notion</a>
+<a href="https://nebula-ferry-f85.notion.site/Ourpage-19c899c22c7a80e588bcdb63c5200ca6">👩‍💻 Notion</a>
