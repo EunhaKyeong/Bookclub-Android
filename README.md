@@ -9,3 +9,6 @@
 <div align="center"><h3>2022.03 Ourpage가 플레이스토어에 정식 출시되었습니다!</h3></div>
 <div align="center"><h3><a href="https://play.google.com/store/apps/details?id=com.mangpo.bookclub">Ourpage 플레이스토어</a></h3><h3><a href="https://instagram.com/ourpage_app?utm_medium=copy_link">Ourpage 공식 인스타그램</a></h3></div>
 <br><br>
+
+<h1>Documents</h1>
+<a href="https://yunamom.tistory.com](https://nebula-ferry-f85.notion.site/Ourpage-19c899c22c7a80e588bcdb63c5200ca6">👩‍💻 Notion</a>
